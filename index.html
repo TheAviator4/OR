@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Katb Ketab Invitation</title>
+  <meta name="description" content="You are warmly invited to celebrate our Katb Ketab." />
+
+  <!-- Social share preview (Open Graph) -->
+  <meta property="og:title" content="Our Katb Ketab — You're Invited" />
+  <meta property="og:description" content="Join us as we begin our journey together, insha'Allah." />
+  <meta property="og:type" content="website" />
+
+  <!-- Online fonts (imported visual elements) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- ===================== ENVELOPE / OPENING OVERLAY ===================== -->
+  <div id="opening" class="opening">
+    <div class="opening__inner">
+      <div class="opening__seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100" class="seal-svg">
+          <circle cx="50" cy="50" r="46" class="seal-ring" />
+          <circle cx="50" cy="50" r="38" class="seal-ring seal-ring--thin" />
+          <text x="50" y="62" text-anchor="middle" class="seal-mono">&amp;</text>
+        </svg>
+      </div>
+      <p class="opening__bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
+      <button id="openBtn" class="btn btn--gold opening__btn">Open the Invitation</button>
+    </div>
+  </div>
+
+  <!-- ===================== AMBIENT PETALS LAYER ===================== -->
+  <div id="petals" class="petals" aria-hidden="true"></div>
+
+  <!-- ===================== MUSIC TOGGLE ===================== -->
+  <button id="musicBtn" class="music-btn" aria-label="Toggle music" title="Play / pause music" hidden>
+    <span class="music-btn__icon">♪</span>
+  </button>
+
+  <!-- ===================== SCROLL PROGRESS ===================== -->
+  <div id="progress" class="scroll-progress" aria-hidden="true"></div>
+
+  <main id="content" class="content">
+
+    <!-- ===================== HERO ===================== -->
+    <section class="section hero" id="hero">
+      <div class="hero__pattern" aria-hidden="true"></div>
+      <div class="hero__frame reveal">
+        <p class="hero__eyebrow">Together with their families</p>
+        <h2 class="hero__sub">We invite you to our</h2>
+        <h1 class="hero__title">Katb Ketab</h1>
+        <div class="names">
+          <span class="names__name" data-config="groom">[ Groom ]</span>
+          <span class="names__amp" aria-hidden="true">&amp;</span>
+          <span class="names__name" data-config="bride">[ Bride ]</span>
+        </div>
+        <p class="hero__date" data-config="dateLong">[ Saturday, the 1st of January, 2026 ]</p>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">
+        <span>scroll</span>
+        <span class="scroll-cue__arrow">⌄</span>
+      </div>
+    </section>
+
+    <!-- ===================== VERSE ===================== -->
+    <section class="section verse" id="verse">
+      <div class="ornament ornament--top reveal" aria-hidden="true">۞</div>
+      <blockquote class="verse__ar reveal" lang="ar" dir="rtl">
+        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+      </blockquote>
+      <p class="verse__en reveal">
+        “And among His signs is that He created for you mates from among yourselves,
+        that you may dwell in tranquillity with them, and He has put love and mercy between your hearts.”
+      </p>
+      <cite class="verse__cite reveal">— Qur'an 30:21</cite>
+    </section>
+
+    <!-- ===================== COUNTDOWN ===================== -->
+    <section class="section countdown" id="countdown">
+      <h3 class="section__title reveal">Counting the days</h3>
+      <div class="countdown__grid reveal" id="countdownGrid" aria-live="polite">
+        <div class="cd-cell"><span class="cd-num" id="cd-days">––</span><span class="cd-label">Days</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-hours">––</span><span class="cd-label">Hours</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-mins">––</span><span class="cd-label">Minutes</span></div>
+        <div class="cd-cell"><span class="cd-num" id="cd-secs">––</span><span class="cd-label">Seconds</span></div>
+      </div>
+      <p class="countdown__msg" id="countdownMsg" hidden>Today is the day, alhamdulillah ✦</p>
+      <a href="#" id="calBtn" class="btn btn--outline reveal">＋ Add to calendar</a>
+    </section>
+
+    <!-- ===================== DETAILS ===================== -->
+    <section class="section details" id="details">
+      <h3 class="section__title reveal">The Celebration</h3>
+      <div class="details__cards">
+        <div class="card reveal">
+          <div class="card__icon" aria-hidden="true">⌚</div>
+          <h4 class="card__head">When</h4>
+          <p class="card__line" data-config="dateLong">[ Saturday, 1 January 2026 ]</p>
+          <p class="card__line" data-config="time">[ 5:00 PM ]</p>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon" aria-hidden="true">⌖</div>
+          <h4 class="card__head">Where</h4>
+          <p class="card__line" data-config="venue">[ Venue Name ]</p>
+          <p class="card__line card__line--muted" data-config="address">[ Street, City ]</p>
+          <a href="#" id="mapBtn" class="card__link">Get directions →</a>
+        </div>
+        <div class="card reveal">
+          <div class="card__icon" aria-hidden="true">❖</div>
+          <h4 class="card__head">Dress</h4>
+          <p class="card__line" data-config="dress">[ Dress code ]</p>
+          <p class="card__line card__line--muted" data-config="dressNote">[ Optional note ]</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LADIES' COLOUR PALETTE ===================== -->
+    <section class="section palette" id="palette">
+      <div class="ornament ornament--top reveal" aria-hidden="true">۞</div>
+      <h3 class="section__title reveal">A Summer Palette</h3>
+      <p class="section__lead reveal">For the ladies — a few summer hues to inspire your outfit.</p>
+      <div class="palette__grid reveal" id="paletteGrid">
+        <!-- Swatches injected from config.ladiesPalette -->
+      </div>
+    </section>
+
+    <!-- ===================== GALLERY ===================== -->
+    <section class="section gallery" id="gallery">
+      <h3 class="section__title reveal">Our Moments</h3>
+      <p class="section__lead reveal">A few favourites along the way.</p>
+      <div class="gallery__grid" id="galleryGrid">
+        <!-- Images injected from config; placeholders shown until you add your own -->
+      </div>
+    </section>
+
+    <!-- ===================== CLOSING ===================== -->
+    <footer class="section closing" id="closing">
+      <div class="closing__pattern" aria-hidden="true"></div>
+      <p class="closing__ar" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+      <p class="closing__en">May God bless you both and unite you in goodness.</p>
+      <div class="names names--small">
+        <span data-config="groom">[ Groom ]</span>
+        <span class="names__amp" aria-hidden="true">&amp;</span>
+        <span data-config="bride">[ Bride ]</span>
+      </div>
+      <p class="closing__hashtag" data-config="hashtag">#OurKatbKetab</p>
+    </footer>
+  </main>
+
+  <!-- Optional background music: drop a file at assets/music.mp3 or set a URL in config.js -->
+  <audio id="bgAudio" loop preload="none"></audio>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
