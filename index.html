@@ -6,71 +6,163 @@
   <title>Katb Ketab Invitation</title>
   <meta name="description" content="You are warmly invited to celebrate our Katb Ketab." />
 
-  <!-- Social share preview (Open Graph) -->
   <meta property="og:title" content="Our Katb Ketab — You're Invited" />
   <meta property="og:description" content="Join us as we begin our journey together, insha'Allah." />
   <meta property="og:type" content="website" />
 
-  <!-- Online fonts (imported visual elements) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;500;600&family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Cinzel:wght@400;500&family=Amiri:ital@0;1&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- ===================== ENVELOPE / OPENING OVERLAY ===================== -->
+
+  <!-- ============================================================= -->
+  <!--  SVG ART LIBRARY  (reusable hand-drawn elements)             -->
+  <!-- ============================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <!-- Olive / botanical sprig -->
+      <symbol id="sprig" viewBox="0 0 150 60">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M6 34 Q 50 24 80 30 T 146 26" />
+        </g>
+        <g fill="currentColor">
+          <ellipse cx="24" cy="24" rx="8.5" ry="3.2" transform="rotate(-28 24 24)"/>
+          <ellipse cx="40" cy="38" rx="8.5" ry="3.2" transform="rotate(26 40 38)"/>
+          <ellipse cx="56" cy="22" rx="9"   ry="3.4" transform="rotate(-30 56 22)"/>
+          <ellipse cx="74" cy="37" rx="9"   ry="3.4" transform="rotate(24 74 37)"/>
+          <ellipse cx="92" cy="22" rx="8.5" ry="3.2" transform="rotate(-26 92 22)"/>
+          <ellipse cx="110" cy="35" rx="8"  ry="3"   transform="rotate(22 110 35)"/>
+          <ellipse cx="126" cy="22" rx="7.5" ry="2.8" transform="rotate(-24 126 22)"/>
+          <circle cx="48" cy="29" r="2.6" opacity=".75"/>
+          <circle cx="84" cy="29" r="2.6" opacity=".75"/>
+          <circle cx="118" cy="28" r="2.3" opacity=".75"/>
+        </g>
+      </symbol>
+
+      <!-- Single lily / blossom -->
+      <symbol id="lily" viewBox="0 0 60 60">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M30 52 C 30 40 30 34 30 30"/>
+          <path d="M30 30 C 22 18 20 10 24 4 C 30 10 32 20 30 30 C 28 20 30 10 36 4 C 40 10 38 18 30 30Z"/>
+          <path d="M30 30 C 18 26 10 24 6 28 C 12 33 22 33 30 30Z"/>
+          <path d="M30 30 C 42 26 50 24 54 28 C 48 33 38 33 30 30Z"/>
+          <path d="M30 30 C 24 32 20 36 20 42 M30 30 C 36 32 40 36 40 42"/>
+        </g>
+      </symbol>
+
+      <!-- Filigree divider -->
+      <symbol id="flourish" viewBox="0 0 240 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round">
+          <path d="M8 12 H 96"/>
+          <path d="M232 12 H 144"/>
+          <path d="M96 12 C 104 4 110 4 116 12 C 110 20 104 20 96 12Z"/>
+          <path d="M144 12 C 136 4 130 4 124 12 C 130 20 136 20 144 12Z"/>
+          <circle cx="120" cy="12" r="3.4" fill="currentColor" stroke="none"/>
+          <circle cx="100" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+          <circle cx="140" cy="12" r="1.6" fill="currentColor" stroke="none"/>
+        </g>
+      </symbol>
+
+      <!-- Wax seal -->
+      <symbol id="seal" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="44" fill="currentColor"/>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="#00000022" stroke-width="2"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#ffffff55" stroke-width="1" stroke-dasharray="2 4"/>
+        <g fill="none" stroke="#ffffffcc" stroke-width="1.6" stroke-linecap="round">
+          <path d="M50 66 V 44"/>
+          <path d="M50 44 C 44 36 42 30 45 26 C 50 31 52 38 50 44 C 48 38 50 31 55 26 C 58 30 56 36 50 44Z"/>
+          <path d="M50 50 C 43 47 38 47 35 50 M50 50 C 57 47 62 47 65 50"/>
+        </g>
+      </symbol>
+
+      <!-- Line icons -->
+      <symbol id="ic-when" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="25" r="14"/><path d="M24 17 V 25 L 30 29 M24 11 V 7 M20 7 H 28"/>
+        </g>
+      </symbol>
+      <symbol id="ic-where" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 42 C 24 42 37 30 37 20 A 13 13 0 0 0 11 20 C 11 30 24 42 24 42Z"/><circle cx="24" cy="20" r="5"/>
+        </g>
+      </symbol>
+      <symbol id="ic-dress" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8 L 24 13 L 29 8 M19 8 C 18 14 14 16 14 22 L 20 24 L 18 40 H 30 L 28 24 L 34 22 C 34 16 30 14 29 8"/>
+        </g>
+      </symbol>
+
+      <!-- Monogram ring -->
+      <symbol id="ring" viewBox="0 0 200 200">
+        <ellipse cx="100" cy="100" rx="78" ry="92" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <ellipse cx="100" cy="100" rx="84" ry="98" fill="none" stroke="currentColor" stroke-width="0.8" stroke-dasharray="1 5"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ===================== OPENING OVERLAY ===================== -->
   <div id="opening" class="opening">
-    <div class="opening__inner">
-      <div class="opening__seal" aria-hidden="true">
-        <svg viewBox="0 0 100 100" class="seal-svg">
-          <circle cx="50" cy="50" r="46" class="seal-ring" />
-          <circle cx="50" cy="50" r="38" class="seal-ring seal-ring--thin" />
-          <text x="50" y="62" text-anchor="middle" class="seal-mono">&amp;</text>
-        </svg>
+    <div class="opening__card">
+      <div class="lace lace--top" aria-hidden="true"></div>
+      <div class="opening__inner">
+        <div class="seal seal--lg" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#seal"/></svg></div>
+        <p class="opening__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
+        <svg class="divider__svg" viewBox="0 0 240 24" aria-hidden="true"><use href="#flourish"/></svg>
+        <button id="openBtn" class="btn btn--seal opening__btn">Open the Invitation</button>
       </div>
-      <p class="opening__bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-      <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
-      <button id="openBtn" class="btn btn--gold opening__btn">Open the Invitation</button>
+      <div class="lace lace--bottom" aria-hidden="true"></div>
     </div>
   </div>
 
-  <!-- ===================== AMBIENT PETALS LAYER ===================== -->
   <div id="petals" class="petals" aria-hidden="true"></div>
 
-  <!-- ===================== MUSIC TOGGLE ===================== -->
   <button id="musicBtn" class="music-btn" aria-label="Toggle music" title="Play / pause music" hidden>
     <span class="music-btn__icon">♪</span>
   </button>
 
-  <!-- ===================== SCROLL PROGRESS ===================== -->
   <div id="progress" class="scroll-progress" aria-hidden="true"></div>
 
   <main id="content" class="content">
 
     <!-- ===================== HERO ===================== -->
     <section class="section hero" id="hero">
-      <div class="hero__pattern" aria-hidden="true"></div>
+      <div class="lace lace--top" aria-hidden="true"></div>
+      <svg class="sprig sprig--tl" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig sprig--tr" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
+
       <div class="hero__frame reveal">
         <p class="hero__eyebrow">Together with their families</p>
         <h2 class="hero__sub">We invite you to our</h2>
         <h1 class="hero__title">Katb Ketab</h1>
-        <div class="names">
-          <span class="names__name" data-config="groom">[ Groom ]</span>
-          <span class="names__amp" aria-hidden="true">&amp;</span>
-          <span class="names__name" data-config="bride">[ Bride ]</span>
+
+        <div class="monogram" aria-hidden="true">
+          <svg class="monogram__ring" viewBox="0 0 200 200"><use href="#ring"/></svg>
+          <span class="monogram__text"><i id="mono-g">O</i><b>&amp;</b><i id="mono-b">R</i></span>
         </div>
-        <p class="hero__date" data-config="dateLong">[ Saturday, the 1st of January, 2026 ]</p>
+
+        <div class="names">
+          <span class="names__name" data-config="groom">Omar</span>
+          <span class="names__amp" aria-hidden="true">&amp;</span>
+          <span class="names__name" data-config="bride">Raghad</span>
+        </div>
+        <p class="hero__date" data-config="dateLong">Friday, 17th of July 2026</p>
       </div>
+
+      <svg class="sprig sprig--bl" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
+      <svg class="sprig sprig--br" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
+
       <div class="scroll-cue" aria-hidden="true">
-        <span>scroll</span>
-        <span class="scroll-cue__arrow">⌄</span>
+        <span>scroll</span><span class="scroll-cue__arrow">⌄</span>
       </div>
     </section>
 
     <!-- ===================== VERSE ===================== -->
     <section class="section verse" id="verse">
-      <div class="ornament ornament--top reveal" aria-hidden="true">۞</div>
+      <svg class="lily lily--solo reveal" viewBox="0 0 60 60" aria-hidden="true"><use href="#lily"/></svg>
       <blockquote class="verse__ar reveal" lang="ar" dir="rtl">
         وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
       </blockquote>
@@ -84,6 +176,7 @@
     <!-- ===================== COUNTDOWN ===================== -->
     <section class="section countdown" id="countdown">
       <h3 class="section__title reveal">Counting the days</h3>
+      <svg class="divider__svg reveal" viewBox="0 0 240 24" aria-hidden="true"><use href="#flourish"/></svg>
       <div class="countdown__grid reveal" id="countdownGrid" aria-live="polite">
         <div class="cd-cell"><span class="cd-num" id="cd-days">––</span><span class="cd-label">Days</span></div>
         <div class="cd-cell"><span class="cd-num" id="cd-hours">––</span><span class="cd-label">Hours</span></div>
@@ -97,63 +190,60 @@
     <!-- ===================== DETAILS ===================== -->
     <section class="section details" id="details">
       <h3 class="section__title reveal">The Celebration</h3>
+      <svg class="divider__svg reveal" viewBox="0 0 240 24" aria-hidden="true"><use href="#flourish"/></svg>
       <div class="details__cards">
         <div class="card reveal">
-          <div class="card__icon" aria-hidden="true">⌚</div>
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-when"/></svg>
           <h4 class="card__head">When</h4>
-          <p class="card__line" data-config="dateLong">[ Saturday, 1 January 2026 ]</p>
-          <p class="card__line" data-config="time">[ 5:00 PM ]</p>
+          <p class="card__line" data-config="dateLong">Friday, 17 July 2026</p>
+          <p class="card__line" data-config="time">8:00 PM</p>
         </div>
         <div class="card reveal">
-          <div class="card__icon" aria-hidden="true">⌖</div>
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-where"/></svg>
           <h4 class="card__head">Where</h4>
-          <p class="card__line" data-config="venue">[ Venue Name ]</p>
-          <p class="card__line card__line--muted" data-config="address">[ Street, City ]</p>
+          <p class="card__line" data-config="venue">Al-Aziz Al-Hakim Mosque</p>
+          <p class="card__line card__line--muted" data-config="address">Cairo, Egypt</p>
           <a href="#" id="mapBtn" class="card__link">Get directions →</a>
         </div>
         <div class="card reveal">
-          <div class="card__icon" aria-hidden="true">❖</div>
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-dress"/></svg>
           <h4 class="card__head">Dress</h4>
-          <p class="card__line" data-config="dress">[ Dress code ]</p>
-          <p class="card__line card__line--muted" data-config="dressNote">[ Optional note ]</p>
+          <p class="card__line" data-config="dress">Elegant &amp; modest</p>
+          <p class="card__line card__line--muted" data-config="dressNote">Summer colours below</p>
         </div>
       </div>
     </section>
 
-    <!-- ===================== LADIES' COLOUR PALETTE ===================== -->
+    <!-- ===================== PALETTE ===================== -->
     <section class="section palette" id="palette">
-      <div class="ornament ornament--top reveal" aria-hidden="true">۞</div>
+      <svg class="sprig sprig--center reveal" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
       <h3 class="section__title reveal">A Summer Palette</h3>
       <p class="section__lead reveal">For the ladies — a few summer hues to inspire your outfit.</p>
-      <div class="palette__grid reveal" id="paletteGrid">
-        <!-- Swatches injected from config.ladiesPalette -->
-      </div>
+      <div class="palette__grid reveal" id="paletteGrid"></div>
     </section>
 
     <!-- ===================== GALLERY ===================== -->
     <section class="section gallery" id="gallery">
       <h3 class="section__title reveal">Our Moments</h3>
       <p class="section__lead reveal">A few favourites along the way.</p>
-      <div class="gallery__grid" id="galleryGrid">
-        <!-- Images injected from config; placeholders shown until you add your own -->
-      </div>
+      <div class="gallery__grid" id="galleryGrid"></div>
     </section>
 
     <!-- ===================== CLOSING ===================== -->
     <footer class="section closing" id="closing">
-      <div class="closing__pattern" aria-hidden="true"></div>
-      <p class="closing__ar" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-      <p class="closing__en">May God bless you both and unite you in goodness.</p>
-      <div class="names names--small">
-        <span data-config="groom">[ Groom ]</span>
+      <div class="lace lace--top lace--invert" aria-hidden="true"></div>
+      <svg class="lily lily--solo reveal" viewBox="0 0 60 60" aria-hidden="true"><use href="#lily"/></svg>
+      <p class="closing__ar reveal" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+      <p class="closing__en reveal">May God bless you both and unite you in goodness.</p>
+      <div class="names names--small reveal">
+        <span data-config="groom">Omar</span>
         <span class="names__amp" aria-hidden="true">&amp;</span>
-        <span data-config="bride">[ Bride ]</span>
+        <span data-config="bride">Raghad</span>
       </div>
-      <p class="closing__hashtag" data-config="hashtag">#OurKatbKetab</p>
+      <p class="closing__hashtag reveal" data-config="hashtag">#OmarAndRaghad</p>
     </footer>
   </main>
 
-  <!-- Optional background music: drop a file at assets/music.mp3 or set a URL in config.js -->
   <audio id="bgAudio" loop preload="none"></audio>
 
   <script src="config.js"></script>

@@ -14,6 +14,13 @@
   });
   document.title = (CFG.groom || "") + " & " + (CFG.bride || "") + " — Katb Ketab";
 
+  // Monogram initials
+  (function monogram() {
+    var g = $("#mono-g"), b = $("#mono-b");
+    if (g && CFG.groom) g.textContent = CFG.groom.trim().charAt(0).toUpperCase();
+    if (b && CFG.bride) b.textContent = CFG.bride.trim().charAt(0).toUpperCase();
+  })();
+
   /* ---------- 2. Ladies' colour palette ---------- */
   (function renderPalette() {
     var grid = $("#paletteGrid");
@@ -137,16 +144,15 @@
   (function petals() {
     var layer = $("#petals");
     if (!layer || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var N = window.innerWidth < 600 ? 10 : 18;
+    var N = window.innerWidth < 600 ? 12 : 20;
     for (var i = 0; i < N; i++) {
       var p = document.createElement("span");
-      p.className = "petal";
-      var size = 8 + Math.floor((i * 37) % 12);
+      p.className = "petal " + (i % 3 === 0 ? "petal--leaf" : "petal--blossom");
       p.style.left = ((i * 53) % 100) + "%";
-      p.style.width = p.style.height = size + "px";
-      p.style.animationDuration = (9 + (i % 7)) + "s";
+      p.style.animationDuration = (10 + (i % 8)) + "s";
       p.style.animationDelay = "-" + (i * 1.3) + "s";
-      p.style.opacity = "0";
+      var scale = 0.7 + ((i * 17) % 60) / 100;
+      p.style.transform = "scale(" + scale.toFixed(2) + ")";
       layer.appendChild(p);
     }
   })();
