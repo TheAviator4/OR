@@ -143,7 +143,7 @@
     window.__startReveals = function () {
       document.body.classList.add("opened");
       $$(".reveal").forEach(function (el) { io.observe(el); });
-      if (window.__startDove) window.__startDove();
+      if (window.__startVine) window.__startVine();
     };
     if (!$("#opening")) window.__startReveals();
 
@@ -245,7 +245,7 @@
         '</svg>';
     }
 
-    layer.innerHTML = doveSVG("dove--amb1") + doveSVG("dove--amb2") + doveSVG("dove--scroll");
+    layer.innerHTML = doveSVG("dove--amb1") + doveSVG("dove--amb2");
 
     // burst doves live in the overlay so they fly out of the envelope
     if (overlay) {
@@ -255,40 +255,152 @@
       overlay.appendChild(burst);
     }
 
-    // ----- scroll-guide dove: escorts the guest from section to section -----
-    var dove = $(".dove--scroll", layer);
-    var WP = [ // [x vw, y vh] waypoints across the page, hero -> closing
-      [76, 20], [16, 30], [80, 34], [14, 26], [82, 30], [18, 24], [50, 30]
-    ];
-    var cur = { x: WP[0][0], y: WP[0][1], fx: 1 };
-    function targetPos() {
-      var h = document.documentElement;
-      var max = h.scrollHeight - h.clientHeight;
-      var p = max ? Math.min(1, h.scrollTop / max) : 0;
-      var segs = WP.length - 1;
-      var seg = Math.min(segs - 1, Math.floor(p * segs));
-      var t = p * segs - seg;
-      t = t * t * (3 - 2 * t); // smoothstep glide
-      var a = WP[seg], b = WP[seg + 1];
-      return { x: a[0] + (b[0] - a[0]) * t, y: a[1] + (b[1] - a[1]) * t };
+  })();
+
+  /* ---------- 12b. The golden vine: draws itself along the scroll ---------- */
+  (function vine() {
+    var svg = $("#vine");
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!svg) return;
+    if (reducedM) { svg.style.display = "none"; return; }
+    var base = $("#vineBase"), draw = $("#vineDraw"),
+        nodesG = $("#vineNodes"), tip = $("#vineTip");
+    var SVGNS = "http://www.w3.org/2000/svg";
+    var total = 0, LUT = [], nodes = [], cur = 0, started = false;
+
+    function build() {
+      var content = $(".content");
+      var W = content.clientWidth, H = content.scrollHeight;
+      var secs = $$(".content .section");
+      if (!secs.length || !W) return;
+      var pts = secs.map(function (s, i) {
+        var top = s.offsetTop, h = s.offsetHeight;
+        if (i === 0) return [W * 0.5, top + h * 0.94];
+        // the closing has a solid background, so land just above it
+        if (i === secs.length - 1) return [W * 0.5, top - 46];
+        return [W * (i % 2 ? 0.13 : 0.87), top + h * 0.5];
+      });
+      var d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+      for (var i = 1; i < pts.length; i++) {
+        var a = pts[i - 1], b = pts[i], my = ((a[1] + b[1]) / 2).toFixed(1);
+        d += " C " + a[0].toFixed(1) + " " + my + ", " + b[0].toFixed(1) + " " + my +
+             ", " + b[0].toFixed(1) + " " + b[1].toFixed(1);
+      }
+      svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+      svg.setAttribute("width", W);
+      svg.setAttribute("height", H);
+      base.setAttribute("d", d);
+      draw.setAttribute("d", d);
+      total = draw.getTotalLength();
+      draw.style.strokeDasharray = total;
+      draw.style.strokeDashoffset = Math.max(0, total - cur);
+      // length-by-Y lookup (path descends monotonically)
+      LUT = [];
+      var N = 260;
+      for (var j = 0; j <= N; j++) {
+        var L = total * j / N;
+        LUT.push([L, draw.getPointAtLength(L).y]);
+      }
+      // a blossom node at every section the vine reaches (skip the start)
+      nodesG.innerHTML = "";
+      nodes = [];
+      for (var k = 1; k < pts.length; k++) {
+        var g = document.createElementNS(SVGNS, "g");
+        g.setAttribute("transform", "translate(" + pts[k][0] + " " + pts[k][1] + ")");
+        g.innerHTML = '<g class="vine-node__in"><use href="#bloom" x="-16" y="-16" width="32" height="32"/></g>';
+        nodesG.appendChild(g);
+        nodes.push({ el: g.firstChild, len: lenForY(pts[k][1]) });
+      }
     }
-    function loop(ts) {
-      var tgt = targetPos();
-      var dx = tgt.x - cur.x;
-      cur.x += dx * 0.055;
-      cur.y += (tgt.y - cur.y) * 0.055;
-      if (dx > 0.25) cur.fx = 1; else if (dx < -0.25) cur.fx = -1;
-      var bob = Math.sin(ts / 480) * 9;
-      var tilt = Math.max(-14, Math.min(14, -dx * 1.6)) * cur.fx;
-      dove.style.transform =
-        "translate(" + cur.x.toFixed(2) + "vw, calc(" + cur.y.toFixed(2) + "vh + " + bob.toFixed(1) + "px))" +
-        " scaleX(" + cur.fx + ") rotate(" + tilt.toFixed(1) + "deg)";
+
+    function lenForY(y) {
+      if (!LUT.length) return 0;
+      if (y <= LUT[0][1]) return LUT[0][0];
+      for (var i = 1; i < LUT.length; i++) {
+        if (LUT[i][1] >= y) {
+          var a = LUT[i - 1], b = LUT[i];
+          var t = (y - a[1]) / ((b[1] - a[1]) || 1);
+          return a[0] + (b[0] - a[0]) * t;
+        }
+      }
+      return total;
+    }
+
+    function loop() {
+      if (total) {
+        var yTarget = window.scrollY + window.innerHeight * 0.62;
+        var target = Math.max(0, Math.min(total, lenForY(yTarget)));
+        cur += (target - cur) * 0.09;
+        draw.style.strokeDashoffset = Math.max(0, total - cur);
+        var L = Math.min(cur, total);
+        var p = draw.getPointAtLength(L);
+        var p2 = draw.getPointAtLength(Math.max(0, L - 8));
+        var ang = Math.atan2(p.y - p2.y, p.x - p2.x) * 180 / Math.PI;
+        tip.setAttribute("transform", "translate(" + p.x.toFixed(1) + " " + p.y.toFixed(1) + ") rotate(" + ang.toFixed(1) + ")");
+        for (var i = 0; i < nodes.length; i++) {
+          if (cur >= nodes[i].len - 6) nodes[i].el.classList.add("bloomed");
+        }
+      }
       requestAnimationFrame(loop);
     }
-    window.__startDove = function () {
-      dove.style.opacity = ".9";
+
+    var rT;
+    window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(build, 180); });
+    window.addEventListener("load", function () { if (started) build(); });
+    window.__startVine = function () {
+      if (started) return;
+      started = true;
+      build();
       requestAnimationFrame(loop);
     };
+  })();
+
+  /* ---------- 12c. Gold-dust bokeh (canvas) ---------- */
+  (function dust() {
+    var cv = $("#dust");
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!cv || reducedM || !cv.getContext) { if (cv) cv.style.display = "none"; return; }
+    var ctx = cv.getContext("2d");
+    var W, H, DPR = Math.min(2, window.devicePixelRatio || 1);
+    function size() {
+      W = window.innerWidth; H = window.innerHeight;
+      cv.width = W * DPR; cv.height = H * DPR;
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    size();
+    window.addEventListener("resize", size);
+    var N = (window.innerWidth < 600) ? 16 : 30;
+    var P = [], lastY = window.scrollY;
+    for (var i = 0; i < N; i++) {
+      P.push({
+        x: ((i * 97) % 100) / 100, y: ((i * 61) % 100) / 100,
+        r: 6 + (i * 37) % 22, s: 0.35 + ((i * 13) % 60) / 100,
+        ph: i * 1.31, c: i % 3
+      });
+    }
+    var COLS = ["200,173,119", "154,166,128", "230,207,198"]; // gold, sage, blush
+    function frame(t) {
+      ctx.clearRect(0, 0, W, H);
+      var dy = window.scrollY - lastY; lastY = window.scrollY;
+      for (var i = 0; i < P.length; i++) {
+        var p = P[i];
+        p.x -= 0.00009 * p.s;
+        p.y -= 0.00006 * p.s + dy * 0.00008 * p.s;
+        if (p.x < -0.06) p.x = 1.06;
+        if (p.y < -0.08) p.y = 1.08; else if (p.y > 1.08) p.y = -0.08;
+        var a = 0.05 + 0.045 * Math.sin(t / 900 * p.s + p.ph);
+        var x = p.x * W, y = p.y * H;
+        var g = ctx.createRadialGradient(x, y, 0, x, y, p.r);
+        g.addColorStop(0, "rgba(" + COLS[p.c] + "," + a.toFixed(3) + ")");
+        g.addColorStop(1, "rgba(" + COLS[p.c] + ",0)");
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(x, y, p.r, 0, 6.2832);
+        ctx.fill();
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
   })();
 
   /* ---------- 12. Gentle scroll parallax on botanicals ---------- */

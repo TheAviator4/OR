@@ -145,6 +145,20 @@
         <path d="M27 4 A 16 16 0 1 0 36 22 A 12.5 12.5 0 1 1 27 4 Z" fill="currentColor"/>
       </symbol>
 
+      <!-- Vine blossom -->
+      <symbol id="bloom" viewBox="0 0 40 40">
+        <g transform="translate(20 20)">
+          <g fill="#eed9d0" stroke="#c8ad77" stroke-width=".9">
+            <ellipse cx="0" cy="-8.5" rx="4.6" ry="7.8"/>
+            <ellipse cx="0" cy="-8.5" rx="4.6" ry="7.8" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-8.5" rx="4.6" ry="7.8" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-8.5" rx="4.6" ry="7.8" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-8.5" rx="4.6" ry="7.8" transform="rotate(288)"/>
+          </g>
+          <circle r="3.6" fill="#c8ad77"/>
+        </g>
+      </symbol>
+
       <!-- Mosque skyline silhouette -->
       <symbol id="mosque" viewBox="0 0 600 120">
         <path fill="currentColor" d="M0 120 L0 100 H60 L60 74 Q85 56 110 74 L110 100 H144
@@ -235,6 +249,9 @@
 
   <div id="petals" class="petals" aria-hidden="true"></div>
 
+  <!-- ===================== GOLD-DUST BOKEH (canvas) ===================== -->
+  <canvas id="dust" aria-hidden="true"></canvas>
+
   <!-- ===================== MOSQUE SKYLINE ===================== -->
   <div class="skyline" aria-hidden="true">
     <svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMax slice"><use href="#mosque"/></svg>
@@ -287,6 +304,14 @@
   <div id="progress" class="scroll-progress" aria-hidden="true"></div>
 
   <main id="content" class="content">
+
+    <!-- The golden vine: one thread connecting every section (drawn by script) -->
+    <svg class="vine" id="vine" aria-hidden="true">
+      <path id="vineBase" d=""/>
+      <path id="vineDraw" d=""/>
+      <g id="vineNodes"></g>
+      <g id="vineTip"><circle r="6"/><use href="#star8" x="-7" y="-7" width="14" height="14"/></g>
+    </svg>
 
     <!-- ===================== HERO ===================== -->
     <section class="section hero" id="hero">
