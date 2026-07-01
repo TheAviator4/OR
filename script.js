@@ -16,9 +16,12 @@
 
   // Monogram initials
   (function monogram() {
-    var g = $("#mono-g"), b = $("#mono-b");
-    if (g && CFG.groom) g.textContent = CFG.groom.trim().charAt(0).toUpperCase();
-    if (b && CFG.bride) b.textContent = CFG.bride.trim().charAt(0).toUpperCase();
+    var g = $("#mono-g"), b = $("#mono-b"), env = $("#envMono");
+    var gi = CFG.groom ? CFG.groom.trim().charAt(0).toUpperCase() : "";
+    var bi = CFG.bride ? CFG.bride.trim().charAt(0).toUpperCase() : "";
+    if (g && gi) g.textContent = gi;
+    if (b && bi) b.textContent = bi;
+    if (env && gi && bi) env.textContent = gi + " & " + bi;
   })();
 
   /* ---------- 2. Ladies' colour palette ---------- */
@@ -187,20 +190,23 @@
     window.__startMusic = function () { if (!playing) toggle(); };
   })();
 
-  /* ---------- 10. Opening overlay (break the seal) ---------- */
+  /* ---------- 10. Opening overlay (envelope unfolds) ---------- */
   (function opening() {
-    var overlay = $("#opening"), btn = $("#openBtn");
+    var overlay = $("#opening"), btn = $("#openBtn"), env = $("#envelope");
     document.body.style.overflow = "hidden";
     if (!overlay || !btn) { document.body.style.overflow = ""; return; }
+    var opened = false;
     btn.addEventListener("click", function () {
-      overlay.classList.add("opening--break");
+      if (opened) return;
+      opened = true;
+      if (env) env.classList.add("is-open");
       if (window.__startMusic) window.__startMusic();
       setTimeout(function () {
         overlay.classList.add("opening--hidden");
         document.body.style.overflow = "";
         if (window.__startReveals) window.__startReveals();
-      }, 800);
-      setTimeout(function () { overlay.style.display = "none"; }, 1900);
+      }, 1600);
+      setTimeout(function () { overlay.style.display = "none"; }, 2700);
     });
   })();
 

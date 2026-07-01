@@ -100,22 +100,124 @@
         <ellipse cx="100" cy="100" rx="78" ry="92" fill="none" stroke="currentColor" stroke-width="1.4"/>
         <ellipse cx="100" cy="100" rx="84" ry="98" fill="none" stroke="currentColor" stroke-width="0.8" stroke-dasharray="1 5"/>
       </symbol>
+
+      <!-- 8-pointed khatam star -->
+      <symbol id="star8" viewBox="0 0 40 40">
+        <g fill="none" stroke="currentColor" stroke-width="1.3">
+          <rect x="9" y="9" width="22" height="22"/>
+          <rect x="9" y="9" width="22" height="22" transform="rotate(45 20 20)"/>
+        </g>
+        <circle cx="20" cy="20" r="2.6" fill="currentColor"/>
+      </symbol>
+
+      <!-- Khatam star band divider -->
+      <symbol id="starband" viewBox="0 0 300 24">
+        <use href="#star8" x="10"  y="2" width="20" height="20"/>
+        <use href="#star8" x="75"  y="2" width="20" height="20"/>
+        <use href="#star8" x="140" y="2" width="20" height="20"/>
+        <use href="#star8" x="205" y="2" width="20" height="20"/>
+        <use href="#star8" x="270" y="2" width="20" height="20"/>
+        <g fill="currentColor" opacity=".7">
+          <circle cx="52.5" cy="12" r="1.8"/><circle cx="117.5" cy="12" r="1.8"/>
+          <circle cx="182.5" cy="12" r="1.8"/><circle cx="247.5" cy="12" r="1.8"/>
+        </g>
+      </symbol>
+
+      <!-- Fanous lantern -->
+      <symbol id="fanous" viewBox="0 0 60 110">
+        <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line x1="30" y1="0" x2="30" y2="13"/>
+          <path d="M22 18 Q30 8 38 18"/>
+          <path d="M18 24 H42"/>
+          <path d="M16 24 C 10 40 10 62 16 78 M44 24 C 50 40 50 62 44 78"/>
+          <path d="M16 78 H44"/>
+          <path d="M24 24 C 21 40 21 62 24 78 M36 24 C 39 40 39 62 36 78"/>
+          <line x1="30" y1="78" x2="30" y2="88"/>
+          <circle cx="30" cy="92" r="3"/>
+        </g>
+        <circle cx="30" cy="51" r="11" fill="currentColor" opacity=".14"/>
+        <use href="#star8" x="21" y="42" width="18" height="18"/>
+      </symbol>
+
+      <!-- Crescent moon -->
+      <symbol id="crescent" viewBox="0 0 40 40">
+        <path d="M27 4 A 16 16 0 1 0 36 22 A 12.5 12.5 0 1 1 27 4 Z" fill="currentColor"/>
+      </symbol>
+
+      <!-- Botanical bouquet with crescent (multicolour) -->
+      <symbol id="bouquet" viewBox="0 0 160 120">
+        <g fill="none" stroke="#7c8a67" stroke-width="1.4" stroke-linecap="round">
+          <path d="M20 110 C 45 85 70 60 103 42"/>
+          <path d="M30 112 C 60 95 90 80 124 72"/>
+          <path d="M18 106 C 35 90 46 72 51 52"/>
+        </g>
+        <g fill="#9aa680">
+          <ellipse cx="56" cy="78" rx="12" ry="4.5" transform="rotate(-35 56 78)"/>
+          <ellipse cx="76" cy="88" rx="11" ry="4.2" transform="rotate(-15 76 88)"/>
+          <ellipse cx="40" cy="92" rx="10" ry="4"   transform="rotate(-50 40 92)"/>
+          <ellipse cx="94" cy="60" rx="11" ry="4"   transform="rotate(-30 94 60)"/>
+          <ellipse cx="112" cy="82" rx="9" ry="3.6" transform="rotate(-10 112 82)"/>
+        </g>
+        <!-- main rose -->
+        <circle cx="104" cy="38" r="17" fill="#e9d2c9"/>
+        <path d="M87 38 a17 17 0 0 1 34 0" fill="#dcb2a9" opacity=".55"/>
+        <g fill="none" stroke="#bb9188" stroke-width="1.1" stroke-linecap="round">
+          <path d="M104 38 C 108 34 107 29 103 27 C 97 25 92 30 94 36 C 96 43 104 46 111 42 C 118 38 118 28 111 23"/>
+          <path d="M104 38 C 102 36 102 33 104 32"/>
+        </g>
+        <!-- five-petal blossom -->
+        <g transform="translate(52 46)">
+          <g fill="#f4e2da">
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(288)"/>
+          </g>
+          <circle r="4.2" fill="#c8ad77"/>
+        </g>
+        <!-- bud -->
+        <circle cx="126" cy="70" r="6" fill="#e9d2c9"/>
+        <path d="M120 75 Q126 62 132 75" fill="none" stroke="#7c8a67" stroke-width="1.2"/>
+        <!-- islamic crescent & star tucked into the flowers -->
+        <use href="#crescent" x="126" y="8" width="22" height="22" style="color:#c8ad77"/>
+        <use href="#star8" x="146" y="2" width="11" height="11" style="color:#c8ad77"/>
+        <g fill="#c8ad77">
+          <circle cx="70" cy="70" r="2"/><circle cx="88" cy="52" r="2"/><circle cx="45" cy="62" r="2"/>
+        </g>
+      </symbol>
     </defs>
   </svg>
 
-  <!-- ===================== OPENING OVERLAY ===================== -->
+  <!-- ===================== OPENING OVERLAY (envelope) ===================== -->
   <div id="opening" class="opening">
-    <div class="opening__card">
-      <div class="lace lace--top" aria-hidden="true"></div>
-      <div class="opening__inner">
-        <div class="seal seal--lg" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#seal"/></svg></div>
-        <p class="opening__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-        <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
-        <svg class="divider__svg" viewBox="0 0 240 24" aria-hidden="true"><use href="#flourish"/></svg>
-        <button id="openBtn" class="btn btn--seal opening__btn">Open the Invitation</button>
+    <p class="opening__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+    <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
+
+    <div class="opening__scene">
+      <div class="envelope" id="envelope">
+        <div class="envelope__back" aria-hidden="true"></div>
+
+        <div class="envelope__card" aria-hidden="true">
+          <svg class="envelope__card-star" viewBox="0 0 40 40"><use href="#star8"/></svg>
+          <span class="envelope__mono" id="envMono">O &amp; R</span>
+          <span class="envelope__line">You are invited</span>
+          <svg class="envelope__card-sprig" viewBox="0 0 150 60"><use href="#sprig"/></svg>
+        </div>
+
+        <div class="envelope__pocket" aria-hidden="true"></div>
+
+        <button class="envelope__flap" id="openBtn" aria-label="Open the invitation">
+          <span class="envelope__face envelope__face--front"></span>
+          <span class="envelope__face envelope__face--back"></span>
+          <span class="envelope__seal" aria-hidden="true">
+            <svg viewBox="0 0 100 100"><use href="#seal"/></svg>
+          </span>
+        </button>
       </div>
-      <div class="lace lace--bottom" aria-hidden="true"></div>
     </div>
+
+    <p class="opening__tap">Tap the seal to open</p>
   </div>
 
   <div id="petals" class="petals" aria-hidden="true"></div>
@@ -168,15 +270,20 @@
     <!-- ===================== HERO ===================== -->
     <section class="section hero" id="hero">
       <div class="lace lace--top" aria-hidden="true"></div>
+      <svg class="fanous fanous--l" viewBox="0 0 60 110" aria-hidden="true"><use href="#fanous"/></svg>
+      <svg class="fanous fanous--r" viewBox="0 0 60 110" aria-hidden="true"><use href="#fanous"/></svg>
       <svg class="sprig sprig--tl" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
       <svg class="sprig sprig--tr" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
 
       <div class="hero__frame reveal">
+        <svg class="bouquet bouquet--tl" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
+        <svg class="bouquet bouquet--br" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
         <p class="hero__eyebrow">Together with their families</p>
         <h2 class="hero__sub">We invite you to our</h2>
         <h1 class="hero__title">Katb Ketab</h1>
 
         <div class="monogram" aria-hidden="true">
+          <svg class="monogram__crest" viewBox="0 0 40 40"><use href="#star8"/></svg>
           <svg class="monogram__ring" viewBox="0 0 200 200"><use href="#ring"/></svg>
           <span class="monogram__text"><i id="mono-g">O</i><b>&amp;</b><i id="mono-b">R</i></span>
         </div>
@@ -199,6 +306,7 @@
 
     <!-- ===================== VERSE ===================== -->
     <section class="section verse" id="verse">
+      <svg class="verse__mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#star8"/></svg>
       <svg class="lily lily--solo reveal grow" viewBox="0 0 60 60" aria-hidden="true"><use href="#lily"/></svg>
       <blockquote class="verse__ar reveal" lang="ar" dir="rtl">
         وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
@@ -227,7 +335,7 @@
     <!-- ===================== DETAILS ===================== -->
     <section class="section details" id="details">
       <h3 class="section__title reveal">The Celebration</h3>
-      <svg class="divider__svg reveal grow" viewBox="0 0 240 24" aria-hidden="true"><use href="#flourish"/></svg>
+      <svg class="starband reveal grow" viewBox="0 0 300 24" aria-hidden="true"><use href="#starband"/></svg>
       <div class="details__cards">
         <div class="card reveal">
           <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-when"/></svg>
@@ -255,6 +363,7 @@
     <section class="section palette" id="palette">
       <svg class="sprig sprig--center reveal grow" viewBox="0 0 150 60" aria-hidden="true"><use href="#sprig"/></svg>
       <h3 class="section__title reveal">A Summer Palette</h3>
+      <svg class="starband reveal grow" viewBox="0 0 300 24" aria-hidden="true"><use href="#starband"/></svg>
       <p class="section__lead reveal">For the ladies — a few summer hues to inspire your outfit.</p>
       <div class="palette__grid reveal" id="paletteGrid"></div>
     </section>
@@ -269,15 +378,24 @@
     <!-- ===================== CLOSING ===================== -->
     <footer class="section closing" id="closing">
       <div class="lace lace--top lace--invert" aria-hidden="true"></div>
-      <svg class="lily lily--solo reveal grow" viewBox="0 0 60 60" aria-hidden="true"><use href="#lily"/></svg>
-      <p class="closing__ar reveal" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-      <p class="closing__en reveal">May God bless you both and unite you in goodness.</p>
-      <div class="names names--small reveal">
-        <span data-config="groom">Omar</span>
-        <span class="names__amp" aria-hidden="true">&amp;</span>
-        <span data-config="bride">Raghad</span>
+      <p class="closing__sent reveal">Sealed with love</p>
+
+      <div class="env-back reveal">
+        <svg class="env-back__flap" viewBox="0 0 340 96" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M2 0 L170 88 L338 0" fill="#f1e9d6" stroke="#d8cdae" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <div class="seal seal--flap" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#seal"/></svg></div>
+        <svg class="bouquet bouquet--closing" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
+
+        <p class="closing__ar" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+        <p class="closing__en">May God bless you both and unite you in goodness.</p>
+        <div class="names names--card">
+          <span data-config="groom">Omar</span>
+          <span class="names__amp" aria-hidden="true">&amp;</span>
+          <span data-config="bride">Raghad</span>
+        </div>
+        <p class="closing__hashtag" data-config="hashtag">#OmarAndRaghad</p>
       </div>
-      <p class="closing__hashtag reveal" data-config="hashtag">#OmarAndRaghad</p>
     </footer>
   </main>
 

@@ -99,24 +99,84 @@ body::before {
 .seal svg { width: 100%; height: 100%; display: block; }
 .seal--lg { width: 104px; height: 104px; margin: 0 auto 1.2rem; animation: sealIn 1s var(--ease) both; }
 
-/* ---------------------------------------------------------- Opening overlay */
+/* ---------------------------------------------------------- Opening overlay (envelope) */
 .opening {
-  position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 1.5rem;
-  background:
-    radial-gradient(circle at 50% 30%, #e9e3d2 0%, #ddd6c2 100%);
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.1rem; padding: 1.5rem; text-align: center;
+  background: radial-gradient(circle at 50% 30%, #e9e3d2 0%, #ddd6c2 100%);
   transition: opacity 1s var(--ease), visibility 1s var(--ease);
 }
 .opening--hidden { opacity: 0; visibility: hidden; }
-.opening__card {
-  width: min(440px, 92vw); background: var(--paper); border-radius: 8px;
-  box-shadow: 0 24px 60px #0000002e, 0 2px 0 #ffffffaa inset;
-  display: flex; flex-direction: column; overflow: hidden;
-  animation: floatIn 1s var(--ease) both;
+.opening__bismillah { font-family: var(--font-arabic); font-size: clamp(1.5rem, 6vw, 2.1rem); color: var(--sage); line-height: 1.9; animation: floatIn 1s var(--ease) both; }
+.opening__hint { color: var(--ink-soft); font-style: italic; font-size: 1rem; animation: floatIn 1s var(--ease) .15s both; }
+.opening__tap { color: var(--sage-mid); font-family: var(--font-label); font-size: .68rem; letter-spacing: .26em; text-transform: uppercase; animation: floatIn 1s var(--ease) .5s both, pulseTap 2.6s ease-in-out 1.6s infinite; }
+@keyframes pulseTap { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+.opening__scene { perspective: 1300px; animation: floatIn 1s var(--ease) .3s both; margin-top: clamp(60px, 14vh, 140px); }
+.envelope {
+  position: relative; width: min(430px, 88vw); aspect-ratio: 10 / 6.6;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 26px 40px #00000030);
 }
-.opening__inner { padding: 2.4rem 2rem; text-align: center; }
-.opening__bismillah { font-family: var(--font-arabic); font-size: clamp(1.5rem, 6vw, 2.1rem); color: var(--sage); line-height: 1.9; }
-.opening__hint { color: var(--ink-soft); font-style: italic; font-size: 1rem; margin-bottom: .4rem; }
-.opening__btn { animation: pulseSeal 3s ease-in-out infinite; }
+/* lattice lining, shared by back panel & flap underside */
+.envelope__back, .envelope__face--back {
+  background:
+    repeating-linear-gradient(45deg,  #ffffff3d 0 2px, transparent 2px 11px),
+    repeating-linear-gradient(-45deg, #ffffff3d 0 2px, transparent 2px 11px),
+    linear-gradient(180deg, #cdd4bb, #bfc7ab);
+}
+.envelope__back { position: absolute; inset: 0; border-radius: 8px; z-index: 1; }
+.envelope__card {
+  position: absolute; left: 6%; right: 6%; top: 6.5%; bottom: 7%;
+  background: var(--paper); border-radius: 5px; z-index: 2;
+  border: 1px solid #e3dabf;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem;
+  box-shadow: 0 -8px 22px #00000014;
+  transition: transform 1.05s var(--ease) .5s;
+}
+.envelope.is-open .envelope__card { transform: translateY(-64%); }
+.envelope__card-star { width: 26px; color: var(--gold); }
+.envelope__mono { font-family: var(--font-script); font-size: 2rem; color: var(--sage); line-height: 1.1; }
+.envelope__line { font-family: var(--font-label); font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--ink-soft); }
+.envelope__card-sprig { width: 84px; color: var(--sage-mid); margin-top: .3rem; }
+.envelope__pocket {
+  position: absolute; inset: 0; z-index: 3; border-radius: 8px;
+  background: linear-gradient(180deg, var(--paper-warm), #eadfc6);
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  box-shadow: 0 -1px 0 #d8cdae inset;
+}
+.envelope__flap {
+  position: absolute; top: 0; left: 0; right: 0; height: 56%;
+  background: none; border: 0; padding: 0; cursor: pointer; z-index: 6;
+  transform-origin: 50% 0; transform-style: preserve-3d;
+}
+.envelope.is-open .envelope__flap { animation: flapOpen .9s var(--ease) forwards; }
+@keyframes flapOpen {
+  0%   { transform: rotateX(0deg);   z-index: 6; }
+  49%  { z-index: 6; }
+  50%  { z-index: 1; }
+  100% { transform: rotateX(178deg); z-index: 1; }
+}
+.envelope__face {
+  position: absolute; inset: 0; backface-visibility: hidden;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.envelope__face--front { background: linear-gradient(180deg, #f6f0df, #ece2c9); border-radius: 8px 8px 0 0; }
+.envelope__face--back  { transform: rotateX(180deg); border-radius: 8px 8px 0 0; }
+.envelope__seal {
+  position: absolute; left: 50%; bottom: 0; width: 68px; height: 68px;
+  transform: translate(-50%, 46%); backface-visibility: hidden;
+  color: var(--sage); filter: drop-shadow(0 5px 8px #00000033);
+  animation: pulseSealScale 2.8s ease-in-out 1.4s infinite;
+  transition: transform .3s var(--ease);
+}
+.envelope__flap:hover .envelope__seal { transform: translate(-50%, 46%) scale(1.08); }
+.envelope__seal svg { width: 100%; height: 100%; display: block; }
+@keyframes pulseSealScale {
+  0%, 100% { filter: drop-shadow(0 5px 8px #00000033); }
+  50%      { filter: drop-shadow(0 5px 16px #5d6b4d88); }
+}
 
 /* ---------------------------------------------------------- Petals */
 .petals { position: fixed; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
@@ -243,13 +303,30 @@ body::before {
   color: var(--ink-soft); font-style: italic; background: #faf6ec88;
 }
 
-/* ---------------------------------------------------------- Closing */
+/* ---------------------------------------------------------- Closing (envelope back) */
 .closing { background: var(--sage); color: var(--paper); }
 .closing .lace--top { position: absolute; top: 0; left: 0; }
-.closing__ar { font-family: var(--font-arabic); font-size: clamp(1.4rem, 4.6vw, 2rem); color: #fff; line-height: 2; max-width: 26ch; margin: .5rem auto 1rem; }
-.closing__en { font-style: italic; color: #ffffffcc; margin-bottom: 1.6rem; font-size: 1.2rem; }
-.closing__hashtag { margin-top: 1.4rem; letter-spacing: .12em; color: #ffffffcc; font-family: var(--font-label); font-size: .78rem; }
-.closing .lily { color: #ffffffbb; }
+.closing__sent { font-family: var(--font-script); font-size: clamp(2rem, 6vw, 3rem); color: #fff; margin-bottom: 1.6rem; }
+.env-back {
+  position: relative; width: min(560px, 92vw);
+  background: var(--paper); border-radius: 10px;
+  border: 1px solid #d8cdae; box-shadow: 0 26px 60px #00000033;
+  padding: clamp(120px, 32vw, 175px) clamp(1.4rem, 5vw, 2.6rem) 2.4rem;
+  overflow: hidden;
+}
+.env-back__flap { position: absolute; top: 0; left: 0; width: 100%; height: auto; }
+.seal--flap {
+  position: absolute; top: 0; left: 50%; width: 72px; height: 72px;
+  transform: translate(-50%, 52%);
+  animation: pulseSealScale 3.2s ease-in-out infinite;
+}
+.bouquet--closing { bottom: -26px; right: -24px; width: clamp(100px, 20vw, 130px); opacity: .95; }
+.closing__ar { font-family: var(--font-arabic); font-size: clamp(1.35rem, 4.4vw, 1.9rem); color: var(--sage); line-height: 2; max-width: 26ch; margin: .4rem auto .8rem; }
+.closing__en { font-style: italic; color: var(--ink-soft); margin-bottom: 1.2rem; font-size: 1.15rem; }
+.names--card span { font-family: var(--font-script); font-size: 1.9rem; color: var(--ink); }
+.names--card { gap: .8rem; }
+.names--card .names__amp { font-size: 1.3rem; color: var(--gold); }
+.closing__hashtag { margin-top: 1.2rem; letter-spacing: .12em; color: var(--gold); font-family: var(--font-label); font-size: .76rem; }
 
 /* ---------------------------------------------------------- Reveal */
 .reveal { opacity: 0; transform: translateY(32px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
@@ -271,17 +348,48 @@ body::before {
    EYE-CATCHING ANIMATION LAYER
    ========================================================================= */
 
-/* ---- 1. Envelope "break the seal" opening ---- */
-.opening--break .seal--lg { animation: sealBreak .7s var(--ease) forwards; }
-.opening--break .opening__card { animation: cardAway .9s var(--ease) .18s forwards; }
-@keyframes sealBreak {
-  30%  { transform: scale(1.18) rotate(-8deg); opacity: 1; }
-  100% { transform: scale(2.1) rotate(18deg); opacity: 0; filter: blur(2px); }
+/* ---- 1. Islamic-botanical art layer ---- */
+
+/* Hanging fanous lanterns */
+.fanous {
+  position: absolute; top: 0; width: clamp(44px, 7vw, 64px); height: auto; z-index: 1;
+  color: var(--gold); transform-origin: 50% 0;
+  animation: lanternSway 5.5s ease-in-out infinite, lanternGlow 3.4s ease-in-out infinite;
 }
-@keyframes cardAway {
-  30%  { transform: translateY(10px) scale(1.01); opacity: 1; }
-  100% { transform: translateY(-72vh) scale(.92) rotate(-2deg); opacity: 0; }
+.fanous--l { left: 8%; }
+.fanous--r { right: 8%; animation-delay: 1.4s, .8s; }
+@keyframes lanternSway { 0%,100% { transform: rotate(3.2deg); } 50% { transform: rotate(-3.2deg); } }
+@keyframes lanternGlow {
+  0%,100% { filter: drop-shadow(0 4px 10px #c8ad7755); }
+  50%     { filter: drop-shadow(0 6px 18px #c8ad77aa); }
 }
+
+/* Corner bouquets on the invitation card */
+.bouquet { position: absolute; width: clamp(110px, 22vw, 158px); height: auto; pointer-events: none; }
+.bouquet--tl { top: -34px; left: -30px; rotate: 180deg; transform-origin: 20% 90%; animation: bouquetSway 7s ease-in-out infinite; }
+.bouquet--br { bottom: -34px; right: -30px; transform-origin: 20% 90%; animation: bouquetSway 7s ease-in-out 2s infinite; }
+@keyframes bouquetSway { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(2.4deg); } }
+
+/* Khatam star band divider */
+.starband { width: clamp(190px, 44vw, 300px); height: auto; color: var(--gold); margin: .4rem auto 1.4rem; display: block; }
+
+/* Giant turning star watermark behind the verse */
+.verse__mark {
+  position: absolute; left: 50%; top: 50%; width: min(72vw, 420px); height: auto;
+  transform: translate(-50%, -50%); color: var(--sage); opacity: .055; pointer-events: none;
+  animation: spinSlow 140s linear infinite;
+}
+
+/* Khatam crest above the monogram */
+.monogram__crest {
+  position: absolute; top: -14px; left: 50%; width: 20px; margin-left: -10px;
+  color: var(--gold); background: var(--paper); padding: 0 2px;
+  animation: spinSlow 30s linear infinite;
+}
+
+/* Mihrab arch niches on the detail cards */
+.card::before { border-radius: 999px 999px 8px 8px; }
+.card { padding-top: 2.8rem; }
 
 /* ---- 2. Calligraphy writes itself in (wipe reveals) ---- */
 .hero__frame.is-visible .hero__title   { animation: wipeIn 1.7s var(--ease) .25s both; }
@@ -300,9 +408,14 @@ body::before {
 @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes popIn  { from { opacity: 0; transform: scale(.3); } to { opacity: 1; transform: scale(1); } }
 
-/* ---- 3. Botanicals grow into view ---- */
-.reveal.grow { clip-path: inset(-8% 100% -8% 0); transition: clip-path 1.6s var(--ease), opacity .8s var(--ease), transform 1s var(--ease); }
-.reveal.grow.is-visible { clip-path: inset(-8% -4% -8% 0); }
+/* ---- 3. Botanicals grow into view ----
+   NB: the initial hide must be opacity (from .reveal), not clip-path —
+   Chromium excludes fully self-clipped elements from IntersectionObserver. */
+.reveal.grow.is-visible { animation: growIn 1.6s var(--ease) both; }
+@keyframes growIn {
+  from { clip-path: inset(-10% 100% -10% 0); }
+  to   { clip-path: inset(-10% -5% -10% 0); }
+}
 .hero .sprig { animation: sprigGrow 1.8s var(--ease) both; animation-play-state: paused; }
 body.opened .hero .sprig { animation-play-state: running; }
 .sprig--tl { animation-delay: .4s !important; }
