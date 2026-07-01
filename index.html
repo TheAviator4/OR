@@ -2,7 +2,8 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4eee0" />
   <title>Katb Ketab Invitation</title>
   <meta name="description" content="You are warmly invited to celebrate our Katb Ketab." />
 
@@ -144,6 +145,18 @@
         <path d="M27 4 A 16 16 0 1 0 36 22 A 12.5 12.5 0 1 1 27 4 Z" fill="currentColor"/>
       </symbol>
 
+      <!-- Mosque skyline silhouette -->
+      <symbol id="mosque" viewBox="0 0 600 120">
+        <path fill="currentColor" d="M0 120 L0 100 H60 L60 74 Q85 56 110 74 L110 100 H144
+          L144 42 H140 L152 18 L164 42 H160 L160 100 H200 L200 86 H228
+          L228 84 Q300 18 372 84 L372 86 H400 L400 100 H440
+          L440 42 H436 L448 18 L460 42 H456 L456 100 H490
+          L490 74 Q515 56 540 74 L540 100 H600 L600 120 Z"/>
+        <use href="#crescent" x="288" y="0" width="24" height="24"/>
+        <use href="#crescent" x="145" y="0" width="14" height="14"/>
+        <use href="#crescent" x="441" y="0" width="14" height="14"/>
+      </symbol>
+
       <!-- Botanical bouquet with crescent (multicolour) -->
       <symbol id="bouquet" viewBox="0 0 160 120">
         <g fill="none" stroke="#7c8a67" stroke-width="1.4" stroke-linecap="round">
@@ -221,6 +234,14 @@
   </div>
 
   <div id="petals" class="petals" aria-hidden="true"></div>
+
+  <!-- ===================== MOSQUE SKYLINE ===================== -->
+  <div class="skyline" aria-hidden="true">
+    <svg viewBox="0 0 600 120" preserveAspectRatio="xMidYMax slice"><use href="#mosque"/></svg>
+  </div>
+
+  <!-- ===================== DOVES (populated by script) ===================== -->
+  <div class="doves" id="doves" aria-hidden="true"></div>
 
   <!-- ===================== BUTTERFLIES ===================== -->
   <div class="butterflies" aria-hidden="true">
@@ -378,6 +399,7 @@
     <!-- ===================== CLOSING ===================== -->
     <footer class="section closing" id="closing">
       <div class="lace lace--top lace--invert" aria-hidden="true"></div>
+      <svg class="skyline--closing" viewBox="0 0 600 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#mosque"/></svg>
       <p class="closing__sent reveal">Sealed with love</p>
 
       <div class="env-back reveal">

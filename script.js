@@ -143,6 +143,7 @@
     window.__startReveals = function () {
       document.body.classList.add("opened");
       $$(".reveal").forEach(function (el) { io.observe(el); });
+      if (window.__startDove) window.__startDove();
     };
     if (!$("#opening")) window.__startReveals();
 
@@ -200,6 +201,7 @@
       if (opened) return;
       opened = true;
       if (env) env.classList.add("is-open");
+      overlay.classList.add("is-open"); // releases the burst doves
       if (window.__startMusic) window.__startMusic();
       setTimeout(function () {
         overlay.classList.add("opening--hidden");
@@ -227,6 +229,66 @@
       s.style.fontSize = (9 + (i * 13) % 9) + "px";
       hero.appendChild(s);
     }
+  })();
+
+  /* ---------- 12a. Doves: ambient gliders, envelope burst, scroll guide ---------- */
+  (function doves() {
+    var layer = $("#doves"), overlay = $("#opening");
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!layer || reducedM) return;
+
+    function doveSVG(cls) {
+      return '<svg class="dove ' + cls + '" viewBox="0 0 64 44" aria-hidden="true">' +
+        '<path class="dove__wing dove__wing--far" d="M34 21 C 38 13 44 8 53 7 C 49 15 43 20 37 23 Z"/>' +
+        '<path class="dove__body" d="M58 18 L51 21 C 48 25 43 28 37 29 C 28 31 18 30 10 26 L3 24 L11 22 L4 18 L13 19 C 23 15 35 13 46 14 C 50 12 53 14 54 16 Z"/>' +
+        '<path class="dove__wing" d="M30 20 C 26 10 30 3 42 1 C 40 9 37 15 33 20 Z"/>' +
+        '</svg>';
+    }
+
+    layer.innerHTML = doveSVG("dove--amb1") + doveSVG("dove--amb2") + doveSVG("dove--scroll");
+
+    // burst doves live in the overlay so they fly out of the envelope
+    if (overlay) {
+      var burst = document.createElement("div");
+      burst.className = "opening__doves";
+      burst.innerHTML = doveSVG("dove--burst1") + doveSVG("dove--burst2") + doveSVG("dove--burst3");
+      overlay.appendChild(burst);
+    }
+
+    // ----- scroll-guide dove: escorts the guest from section to section -----
+    var dove = $(".dove--scroll", layer);
+    var WP = [ // [x vw, y vh] waypoints across the page, hero -> closing
+      [76, 20], [16, 30], [80, 34], [14, 26], [82, 30], [18, 24], [50, 30]
+    ];
+    var cur = { x: WP[0][0], y: WP[0][1], fx: 1 };
+    function targetPos() {
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var p = max ? Math.min(1, h.scrollTop / max) : 0;
+      var segs = WP.length - 1;
+      var seg = Math.min(segs - 1, Math.floor(p * segs));
+      var t = p * segs - seg;
+      t = t * t * (3 - 2 * t); // smoothstep glide
+      var a = WP[seg], b = WP[seg + 1];
+      return { x: a[0] + (b[0] - a[0]) * t, y: a[1] + (b[1] - a[1]) * t };
+    }
+    function loop(ts) {
+      var tgt = targetPos();
+      var dx = tgt.x - cur.x;
+      cur.x += dx * 0.055;
+      cur.y += (tgt.y - cur.y) * 0.055;
+      if (dx > 0.25) cur.fx = 1; else if (dx < -0.25) cur.fx = -1;
+      var bob = Math.sin(ts / 480) * 9;
+      var tilt = Math.max(-14, Math.min(14, -dx * 1.6)) * cur.fx;
+      dove.style.transform =
+        "translate(" + cur.x.toFixed(2) + "vw, calc(" + cur.y.toFixed(2) + "vh + " + bob.toFixed(1) + "px))" +
+        " scaleX(" + cur.fx + ") rotate(" + tilt.toFixed(1) + "deg)";
+      requestAnimationFrame(loop);
+    }
+    window.__startDove = function () {
+      dove.style.opacity = ".9";
+      requestAnimationFrame(loop);
+    };
   })();
 
   /* ---------- 12. Gentle scroll parallax on botanicals ---------- */
