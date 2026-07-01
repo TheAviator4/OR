@@ -27,8 +27,8 @@
     var list = CFG.ladiesPalette || [];
     if (!grid) return;
     if (!list.length) { var sec = $("#palette"); if (sec) sec.style.display = "none"; return; }
-    grid.innerHTML = list.map(function (c) {
-      return '<div class="swatch">' +
+    grid.innerHTML = list.map(function (c, i) {
+      return '<div class="swatch" style="--i:' + i + '">' +
                '<div class="swatch__chip" style="background:' + c.hex + '"></div>' +
                '<span class="swatch__name">' + c.name + '</span>' +
                '<span class="swatch__hex">' + c.hex + '</span>' +
@@ -66,6 +66,13 @@
     var grid = $("#countdownGrid"), msg = $("#countdownMsg");
     if (isNaN(target) || !els.d) return;
     var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+    var setNum = function (el, val) {
+      if (el.textContent === String(val)) return;
+      el.textContent = val;
+      el.classList.remove("tick");
+      void el.offsetWidth; // restart animation
+      el.classList.add("tick");
+    };
     function tick() {
       var diff = target - Date.now();
       if (diff <= 0) {
@@ -75,10 +82,10 @@
         return;
       }
       var s = Math.floor(diff / 1000);
-      els.d.textContent = Math.floor(s / 86400);
-      els.h.textContent = pad(Math.floor((s % 86400) / 3600));
-      els.m.textContent = pad(Math.floor((s % 3600) / 60));
-      els.s.textContent = pad(s % 60);
+      setNum(els.d, Math.floor(s / 86400));
+      setNum(els.h, pad(Math.floor((s % 86400) / 3600)));
+      setNum(els.m, pad(Math.floor((s % 3600) / 60)));
+      setNum(els.s, pad(s % 60));
     }
     tick();
     var timer = setInterval(tick, 1000);
@@ -128,7 +135,13 @@
         if (en.isIntersecting) { en.target.classList.add("is-visible"); io.unobserve(en.target); }
       });
     }, { threshold: 0.15 });
-    $$(".reveal").forEach(function (el) { io.observe(el); });
+    // Hold reveals until the envelope is opened, so no animation plays unseen
+    // behind the overlay; opening() calls __startReveals.
+    window.__startReveals = function () {
+      document.body.classList.add("opened");
+      $$(".reveal").forEach(function (el) { io.observe(el); });
+    };
+    if (!$("#opening")) window.__startReveals();
 
     var bar = $("#progress");
     function onScroll() {
@@ -174,16 +187,58 @@
     window.__startMusic = function () { if (!playing) toggle(); };
   })();
 
-  /* ---------- 10. Opening overlay ---------- */
+  /* ---------- 10. Opening overlay (break the seal) ---------- */
   (function opening() {
     var overlay = $("#opening"), btn = $("#openBtn");
     document.body.style.overflow = "hidden";
     if (!overlay || !btn) { document.body.style.overflow = ""; return; }
     btn.addEventListener("click", function () {
-      overlay.classList.add("opening--hidden");
-      document.body.style.overflow = "";
+      overlay.classList.add("opening--break");
       if (window.__startMusic) window.__startMusic();
-      setTimeout(function () { overlay.style.display = "none"; }, 1000);
+      setTimeout(function () {
+        overlay.classList.add("opening--hidden");
+        document.body.style.overflow = "";
+        if (window.__startReveals) window.__startReveals();
+      }, 800);
+      setTimeout(function () { overlay.style.display = "none"; }, 1900);
     });
+  })();
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- 11. Gold sparkles in the hero ---------- */
+  (function sparkles() {
+    var hero = $("#hero");
+    if (!hero || reduced) return;
+    var N = window.innerWidth < 600 ? 9 : 16;
+    for (var i = 0; i < N; i++) {
+      var s = document.createElement("span");
+      s.className = "sparkle";
+      s.textContent = "✦";
+      s.style.left = (6 + (i * 61) % 88) + "%";
+      s.style.top  = (8 + (i * 37) % 80) + "%";
+      s.style.animationDelay = ((i * 0.47) % 3.2).toFixed(2) + "s";
+      s.style.fontSize = (9 + (i * 13) % 9) + "px";
+      hero.appendChild(s);
+    }
+  })();
+
+  /* ---------- 12. Gentle scroll parallax on botanicals ---------- */
+  (function parallax() {
+    if (reduced) return;
+    var items = $$(".hero .sprig, .sprig--center, .lily--solo");
+    if (!items.length) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.scrollY || 0;
+      items.forEach(function (el, i) {
+        var rate = (i % 2 === 0 ? 0.10 : -0.07);
+        el.style.setProperty("--py", (y * rate).toFixed(1) + "px");
+      });
+    }
+    document.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
   })();
 })();
