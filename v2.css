@@ -159,9 +159,98 @@ body {
 .closing__en { font-style: italic; color: var(--ink-soft); margin-bottom: 1rem; }
 .closing__hashtag { font-family: var(--font-label); font-size: .72rem; letter-spacing: .14em; color: var(--gold); }
 
-/* reveals */
-.reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-.reveal.is-visible { opacity: 1; transform: none; }
+/* ---------------- paper cards over the film ---------------- */
+.card {
+  position: relative; width: 100%;
+  background: #faf6ecf5;
+  border: 1px solid #d8cdae; border-radius: 18px;
+  outline: 1px solid #d8cdae66; outline-offset: 6px;
+  box-shadow: 0 24px 60px #00000024;
+  padding: clamp(1.8rem, 5.5vw, 3rem) clamp(1.1rem, 4.5vw, 2.4rem);
+  overflow: hidden;
+}
+/* gold corner brackets */
+.card::before {
+  content: ""; position: absolute; inset: 10px; pointer-events: none; z-index: 0;
+  background:
+    linear-gradient(#c8ad77, #c8ad77) top left      / 20px 1.5px,
+    linear-gradient(#c8ad77, #c8ad77) top left      / 1.5px 20px,
+    linear-gradient(#c8ad77, #c8ad77) top right     / 20px 1.5px,
+    linear-gradient(#c8ad77, #c8ad77) top right     / 1.5px 20px,
+    linear-gradient(#c8ad77, #c8ad77) bottom left   / 20px 1.5px,
+    linear-gradient(#c8ad77, #c8ad77) bottom left   / 1.5px 20px,
+    linear-gradient(#c8ad77, #c8ad77) bottom right  / 20px 1.5px,
+    linear-gradient(#c8ad77, #c8ad77) bottom right  / 1.5px 20px;
+  background-repeat: no-repeat; opacity: .8;
+}
+/* one gold sheen sweep right after the card lands */
+.card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: linear-gradient(115deg, transparent 42%, #ffffff99 50%, transparent 58%);
+  background-size: 280% 100%; background-position: 130% 0; border-radius: 18px;
+}
+.card.is-visible::after { animation: sheen 1.6s ease-out .55s both; }
+@keyframes sheen { from { background-position: 130% 0; } to { background-position: -150% 0; } }
+.card > * { position: relative; z-index: 2; }
+
+/* ---------------- entrance motion ---------------- */
+/* the card springs up with a soft overshoot */
+.card.reveal { opacity: 0; }
+.card.reveal.is-visible { animation: cardIn .95s cubic-bezier(.30,1.25,.42,1) both; }
+@keyframes cardIn {
+  0%   { opacity: 0; transform: translateY(64px) scale(.94); }
+  100% { opacity: 1; transform: none; }
+}
+/* inner lines cascade in, focusing from a soft blur */
+.st { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+.card.is-visible .st {
+  animation: stIn .75s var(--ease) both;
+}
+@keyframes stIn {
+  from { opacity: 0; transform: translateY(18px); filter: blur(5px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+.card.is-visible .st:nth-child(1)  { animation-delay: .30s; }
+.card.is-visible .st:nth-child(2)  { animation-delay: .42s; }
+.card.is-visible .st:nth-child(3)  { animation-delay: .54s; }
+.card.is-visible .st:nth-child(4)  { animation-delay: .66s; }
+.card.is-visible .st:nth-child(5)  { animation-delay: .78s; }
+.card.is-visible .st:nth-child(6)  { animation-delay: .90s; }
+.card.is-visible .st:nth-child(7)  { animation-delay: 1.02s; }
+.card.is-visible .st:nth-child(8)  { animation-delay: 1.14s; }
+.card.is-visible .st:nth-child(9)  { animation-delay: 1.26s; }
+.card.is-visible .st:nth-child(10) { animation-delay: 1.38s; }
+/* the names write themselves in */
+.card.is-visible .invite__names { animation: namesIn 1.5s var(--ease) both; animation-delay: .55s; }
+@keyframes namesIn {
+  0%   { opacity: 0; clip-path: inset(-20% 100% -20% 0); filter: none; transform: none; }
+  30%  { opacity: 1; }
+  100% { opacity: 1; clip-path: inset(-20% -10% -20% 0); filter: none; transform: none; }
+}
+/* countdown cells pop one-two-three-four */
+.card.is-visible .cd { animation: cdPop .65s cubic-bezier(.34,1.56,.64,1) both; }
+.card.is-visible .cd:nth-child(1) { animation-delay: 1.0s; }
+.card.is-visible .cd:nth-child(2) { animation-delay: 1.12s; }
+.card.is-visible .cd:nth-child(3) { animation-delay: 1.24s; }
+.card.is-visible .cd:nth-child(4) { animation-delay: 1.36s; }
+@keyframes cdPop { from { opacity: 0; transform: translateY(22px) scale(.6); } to { opacity: 1; transform: none; } }
+/* palette swatches bloom in a cascade */
+.card.is-visible .swatch { animation: swPop .6s cubic-bezier(.34,1.56,.64,1) both; }
+.card.is-visible .swatch:nth-child(1) { animation-delay: .9s; }
+.card.is-visible .swatch:nth-child(2) { animation-delay: .98s; }
+.card.is-visible .swatch:nth-child(3) { animation-delay: 1.06s; }
+.card.is-visible .swatch:nth-child(4) { animation-delay: 1.14s; }
+.card.is-visible .swatch:nth-child(5) { animation-delay: 1.22s; }
+.card.is-visible .swatch:nth-child(6) { animation-delay: 1.30s; }
+.card.is-visible .swatch:nth-child(7) { animation-delay: 1.38s; }
+.card.is-visible .swatch:nth-child(8) { animation-delay: 1.46s; }
+@keyframes swPop { from { opacity: 0; transform: translateY(18px) scale(.4); } to { opacity: 1; transform: none; } }
+.swatch { opacity: 0; }
+.card:not(.is-visible) .cd { opacity: 0; }
+
+/* legacy reveal (kept for any non-card element) */
+.reveal:not(.card) { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal:not(.card).is-visible { opacity: 1; transform: none; }
 
 @media (max-width: 380px) {
   body { font-size: 17px; }
@@ -171,6 +260,8 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
+  .reveal, .card.reveal, .st, .swatch, .cd, .card:not(.is-visible) .cd {
+    opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important;
+  }
   html { scroll-behavior: auto; }
 }
