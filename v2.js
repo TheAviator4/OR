@@ -26,8 +26,10 @@
     var url = CFG.mapUrl && CFG.mapUrl.trim()
       ? CFG.mapUrl
       : "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CFG.address || CFG.venue || "");
-    var map = $("#mapBtn");
-    if (map) { map.href = url; map.target = "_blank"; map.rel = "noopener"; }
+    ["#mapBtn", "#mapBtn2"].forEach(function (sel) {
+      var map = $(sel);
+      if (map) { map.href = url; map.target = "_blank"; map.rel = "noopener"; }
+    });
 
     var cal = $("#calBtn");
     if (cal && CFG.eventDate) {
