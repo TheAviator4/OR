@@ -82,19 +82,16 @@ body {
 /* scroll runway: arch -> inside -> faded backdrop, then content begins */
 .stage { position: relative; height: 240vh; height: 240svh; z-index: 2; }
 .stage__cue {
-  position: absolute; top: calc(100vh - 6.4rem); top: calc(100svh - 6.4rem);
+  position: absolute; top: calc(100vh - 5.6rem); top: calc(100svh - 5.6rem);
   left: 50%; transform: translateX(-50%);
-  background: #5d6b4de6; color: #fff;
-  border: 1px solid #ffffff59; border-radius: 2rem;
-  padding: .8rem 1.5rem .55rem; box-shadow: 0 12px 30px #00000038;
-  backdrop-filter: blur(6px);
-  font-family: var(--font-label); font-size: .72rem;
-  letter-spacing: .24em; text-transform: uppercase; text-align: center;
+  color: var(--sage); font-family: var(--font-label); font-size: .78rem; font-weight: 500;
+  letter-spacing: .26em; text-transform: uppercase; text-align: center;
+  text-shadow: 0 0 12px var(--cream), 0 0 24px var(--cream);
   pointer-events: none; white-space: nowrap;
-  animation: cuePulse 2.6s ease-in-out infinite;
+  animation: cueFade 2.6s ease-in-out infinite;
 }
-@keyframes cuePulse { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.05); } }
-.stage__cue-arrow { display: block; font-size: 1.5rem; line-height: 1; animation: bob 1.6s ease-in-out infinite; }
+@keyframes cueFade { 0%,100% { opacity: 1; } 50% { opacity: .45; } }
+.stage__cue-arrow { display: block; font-size: 1.5rem; line-height: 1; color: var(--gold); animation: bob 1.6s ease-in-out infinite; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
 
 /* ---------------- content over the faded film ---------------- */
@@ -153,14 +150,12 @@ body {
 .detail p { font-size: 1.05rem; }
 .muted { color: var(--ink-soft); font-size: .95rem; }
 
-/* palette */
-.palette { display: flex; justify-content: center; flex-wrap: wrap; gap: .9rem; }
-.swatch { width: 92px; }
-.swatch i {
-  display: block; width: 54px; height: 54px; margin: 0 auto; border-radius: 50%;
+/* palette: pure colour chips (names appear as hover tooltips only) */
+.palette { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+.swatch {
+  display: block; width: 56px; height: 56px; border-radius: 50%;
   box-shadow: inset 0 0 0 3px #ffffffcc, 0 6px 14px #00000020; border: 1px solid #00000010;
 }
-.swatch b { display: block; font-weight: 400; font-family: var(--font-serif); font-style: italic; color: var(--sage); font-size: .92rem; line-height: 1.25; margin-top: .35rem; }
 
 /* ---------------- classic-style arch cards (The Celebration) ---------------- */
 .script { font-family: var(--font-script) !important; font-weight: 400 !important; }
@@ -399,9 +394,10 @@ html[lang="ar"] .swatch b, html[lang="ar"] .arch-card p, html[lang="ar"] .countd
   font-family: "Almarai", sans-serif; letter-spacing: 0; text-transform: none; font-style: normal;
 }
 html[lang="ar"] .invite__eyebrow { font-size: .98rem; color: var(--gold); font-weight: 700; }
-html[lang="ar"] .stage__cue { font-size: .95rem; padding: .7rem 1.5rem .5rem; font-weight: 700; }
+html[lang="ar"] .stage__cue { font-size: .95rem; font-weight: 700; }
 html[lang="ar"] .btn, html[lang="ar"] .arch-card__link { font-size: .88rem; font-weight: 700; padding: .78rem 1.7rem; }
 html[lang="ar"] .cd span { font-size: .78rem; }
+html[lang="ar"] .countdown { direction: ltr; }
 html[lang="ar"] .invite__line { font-size: 1.1rem; }
 html[lang="ar"] .invite__line strong { font-weight: 700; }
 html[lang="ar"] .swatch b { font-size: .88rem; }

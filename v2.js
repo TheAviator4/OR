@@ -22,7 +22,7 @@
     if (!grid || !list.length) return;
     grid.innerHTML = list.map(function (c) {
       var label = AR && c.nameAr ? c.nameAr : c.name;
-      return '<div class="swatch"><i style="background:' + c.hex + '"></i><b>' + label + "</b></div>";
+      return '<i class="swatch" style="background:' + c.hex + '" title="' + label + '"></i>';
     }).join("");
   })();
 

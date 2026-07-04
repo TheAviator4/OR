@@ -25,9 +25,9 @@ window.INVITATION = {
 
   /* ---- Venue ---- */
   venue:   "Al-Aziz Al-Hakim Mosque",
-  address: "Al-Hakim Mosque, Al-Muizz Street, Cairo, Egypt",
+  address: "Al Abageyah, El Mokattam, Cairo, Egypt",
   venueAr:   "مسجد العزيز الحكيم",
-  addressAr: "جامع الحاكم، شارع المعز، القاهرة",
+  addressAr: "الأباجية، المقطم، القاهرة",
   // Google Maps location link (tap = opens directions):
   mapUrl:  "https://maps.app.goo.gl/KiraxrUkas2D9LPx5?g_st=ic",
 

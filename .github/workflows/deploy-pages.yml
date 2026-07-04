@@ -44,7 +44,7 @@ jobs:
       # later" - one retry after a short pause almost always succeeds.
       - name: Wait before retry
         if: steps.deployment.outcome == 'failure'
-        run: sleep 30
+        run: sleep 75
 
       - name: Deploy (retry)
         id: deployment_retry
