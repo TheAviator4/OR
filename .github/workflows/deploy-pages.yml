@@ -4,7 +4,6 @@ name: Deploy invitation to GitHub Pages
 on:
   push:
     branches:
-      - claude/katb-ketab-invitation-btchxz
       - main
   workflow_dispatch:
 
