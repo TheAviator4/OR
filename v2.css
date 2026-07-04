@@ -47,51 +47,37 @@ body {
 }
 .sound-btn:hover { transform: scale(1.08); }
 
-/* ---------------- the film stage ---------------- */
-.stage {
-  position: relative; height: 100vh; height: 100dvh;
-  background: var(--cream); overflow: hidden;
-  display: grid; place-items: center;
+/* ---------------- the film: fixed backdrop ---------------- */
+.bgfilm {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0; pointer-events: none;
+  will-change: filter;
 }
-.stage__video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* On wide screens, present the portrait film in a gold arch frame */
-@media (min-aspect-ratio: 5/6) {
-  .stage {
-    background:
-      radial-gradient(70vw 70vh at 50% 45%, #ffffff88 0%, transparent 70%),
-      var(--cream);
-  }
-  .stage__video {
-    width: auto; height: 90vh; height: 90dvh; aspect-ratio: 688 / 1312;
-    border-radius: 999px 999px 16px 16px;
-    border: 1px solid var(--gold-soft);
-    outline: 1px solid var(--gold-soft); outline-offset: 7px;
-    box-shadow: 0 26px 70px #00000030;
-  }
+/* cream veil that thickens as the guest scrolls (opacity set by JS) */
+.veil {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: 0;
+  background:
+    radial-gradient(130vw 100vh at 50% 30%, #f4eee0d9 0%, #f4eee0f2 78%);
 }
 
+/* the opening view: one empty screen so the film greets first */
+.stage { position: relative; height: 100vh; height: 100svh; z-index: 2; }
 .stage__cue {
   position: absolute; bottom: max(1.1rem, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
   color: var(--paper); font-family: var(--font-label); font-size: .62rem;
   letter-spacing: .3em; text-transform: uppercase; text-align: center;
   text-shadow: 0 1px 8px #00000066; pointer-events: none;
 }
-@media (min-aspect-ratio: 5/6) { .stage__cue { color: var(--sage-mid); text-shadow: none; } }
 .stage__cue-arrow { display: block; font-size: 1.3rem; animation: bob 2s ease-in-out infinite; }
 @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(7px); } }
 
-/* ---------------- paper body ---------------- */
-.paper { position: relative; background: var(--cream); }
-.lace { position: relative; height: 26px; margin-top: -25px; z-index: 2; }
-.lace::before {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(circle at 10px 0, transparent 8.6px, var(--cream) 9.6px) 0 0 / 20px 26px repeat-x;
-}
-
+/* ---------------- content over the faded film ---------------- */
+.content { position: relative; z-index: 2; }
 .block {
-  max-width: 680px; margin: 0 auto; text-align: center;
-  padding: clamp(3.2rem, 9vh, 5.5rem) max(1.4rem, env(safe-area-inset-left));
+  min-height: 100vh; min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  max-width: 760px; margin: 0 auto; text-align: center;
+  padding: clamp(3rem, 8vh, 5rem) max(1.4rem, env(safe-area-inset-left));
   padding-right: max(1.4rem, env(safe-area-inset-right));
 }
 .block__title { font-family: var(--font-script); font-size: clamp(2.2rem, 7vw, 3.4rem); color: var(--sage); margin-bottom: 1.6rem; }

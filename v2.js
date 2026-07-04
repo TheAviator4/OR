@@ -78,9 +78,10 @@
     $$(".reveal").forEach(function (el) { io.observe(el); });
   })();
 
-  /* film: sound toggle + pause when offscreen */
+  /* film: sound toggle + fade into the background on scroll */
   (function () {
-    var film = $("#film"), btn = $("#soundBtn"), icon = $("#soundIcon");
+    var film = $("#film"), btn = $("#soundBtn"), icon = $("#soundIcon"),
+        veil = $("#veil"), cue = $("#stageCue");
     if (!film) return;
     film.play && film.play().catch(function () {});
     document.addEventListener("touchstart", function once() {
@@ -95,11 +96,20 @@
         if (!film.muted && film.paused) film.play().catch(function () {});
       });
     }
-    new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { film.play().catch(function () {}); }
-        else film.pause();
-      });
-    }, { threshold: 0.1 }).observe(film);
+
+    // full film on the first screen; a cream veil thickens over ~90% of a
+    // viewport of scrolling, then the film stays as a soft faded backdrop
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var p = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
+      if (veil) veil.style.opacity = (p * 0.88).toFixed(3);
+      film.style.filter = p > 0.02 ? "blur(" + (p * 2.2).toFixed(2) + "px)" : "";
+      if (cue) cue.style.opacity = (1 - p * 1.6).toFixed(2);
+    }
+    document.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
   })();
 })();

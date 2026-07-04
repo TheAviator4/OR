@@ -30,21 +30,23 @@
     <span id="soundIcon">🔇</span>
   </button>
 
-  <!-- ============ THE FILM ============ -->
+  <!-- ============ THE FILM (fixed backdrop) ============ -->
+  <video id="film" class="bgfilm" autoplay muted loop playsinline
+         preload="auto" poster="assets/film-poster.jpg" aria-hidden="true">
+    <source src="assets/film-play.mp4" type="video/mp4" />
+    <source src="assets/film-play.webm" type="video/webm" />
+  </video>
+  <div class="veil" id="veil" aria-hidden="true"></div>
+
+  <!-- full-screen opening view of the film -->
   <section class="stage" id="stage">
-    <video id="film" class="stage__video" autoplay muted loop playsinline
-           preload="auto" poster="assets/film-poster.jpg">
-      <source src="assets/film-play.mp4" type="video/mp4" />
-      <source src="assets/film-play.webm" type="video/webm" />
-    </video>
-    <div class="stage__cue" aria-hidden="true">
+    <div class="stage__cue" id="stageCue" aria-hidden="true">
       <span>scroll</span><span class="stage__cue-arrow">⌄</span>
     </div>
   </section>
 
   <!-- ============ THE INVITATION ============ -->
-  <main class="paper">
-    <div class="lace" aria-hidden="true"></div>
+  <main class="content">
 
     <section class="block invite">
       <p class="invite__bismillah reveal" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
