@@ -355,6 +355,35 @@
     };
   })();
 
+  /* ---------- 12b2. Background film: fades away as the guest scrolls ---------- */
+  (function bgFilm() {
+    var v = $("#bgFilm");
+    if (!v) return;
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedM) { v.style.display = "none"; return; }
+    v.play && v.play().catch(function () {});
+    // some browsers hold muted autoplay until the first touch
+    document.addEventListener("touchstart", function once() {
+      v.play().catch(function () {});
+      document.removeEventListener("touchstart", once);
+    }, { once: true, passive: true });
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var h = document.documentElement;
+      var max = h.scrollHeight - h.clientHeight;
+      var p = max ? h.scrollTop / max : 0;
+      // vivid on the hero, fading to a whisper as the guest travels down
+      var op = Math.max(0.05, 0.32 - p * 0.55);
+      v.style.opacity = op.toFixed(3);
+    }
+    document.addEventListener("scroll", function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  })();
+
   /* ---------- 12c. Scroll-scrubbed film ---------- */
   (function film() {
     var sec = $("#film"), vid = $("#filmVideo"), frame = $(".film__frame"), hint = $("#filmHint");

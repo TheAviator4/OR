@@ -216,36 +216,13 @@
     </defs>
   </svg>
 
-  <!-- ===================== OPENING OVERLAY (envelope) ===================== -->
-  <div id="opening" class="opening">
-    <p class="opening__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-    <p class="opening__hint">In the name of God, the Most Gracious, the Most Merciful</p>
-
-    <div class="opening__scene">
-      <div class="envelope" id="envelope">
-        <div class="envelope__back" aria-hidden="true"></div>
-
-        <div class="envelope__card" aria-hidden="true">
-          <svg class="envelope__card-star" viewBox="0 0 40 40"><use href="#star8"/></svg>
-          <span class="envelope__mono" id="envMono">O &amp; R</span>
-          <span class="envelope__line">You are invited</span>
-          <svg class="envelope__card-sprig" viewBox="0 0 150 60"><use href="#sprig"/></svg>
-        </div>
-
-        <div class="envelope__pocket" aria-hidden="true"></div>
-
-        <button class="envelope__flap" id="openBtn" aria-label="Open the invitation">
-          <span class="envelope__face envelope__face--front"></span>
-          <span class="envelope__face envelope__face--back"></span>
-          <span class="envelope__seal" aria-hidden="true">
-            <svg viewBox="0 0 100 100"><use href="#seal"/></svg>
-          </span>
-        </button>
-      </div>
-    </div>
-
-    <p class="opening__tap">Tap the seal to open</p>
-  </div>
+  <!-- ===================== BACKGROUND FILM ===================== -->
+  <video id="bgFilm" class="bgfilm" muted playsinline autoplay loop
+         preload="auto" poster="assets/film-poster.jpg" aria-hidden="true">
+    <source src="assets/film.mp4" type="video/mp4" />
+    <source src="assets/film.webm" type="video/webm" />
+  </video>
+  <div class="bgfilm-veil" aria-hidden="true"></div>
 
   <div id="petals" class="petals" aria-hidden="true"></div>
 
@@ -324,6 +301,7 @@
       <div class="hero__frame reveal">
         <svg class="bouquet bouquet--tl" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
         <svg class="bouquet bouquet--br" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
+        <p class="hero__bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
         <p class="hero__eyebrow">Together with their families</p>
         <h2 class="hero__sub">We invite you to our</h2>
         <h1 class="hero__title">Katb Ketab</h1>
