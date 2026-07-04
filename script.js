@@ -355,7 +355,60 @@
     };
   })();
 
-  /* ---------- 12c. Gold-dust bokeh (canvas) ---------- */
+  /* ---------- 12c. Scroll-scrubbed film ---------- */
+  (function film() {
+    var sec = $("#film"), vid = $("#filmVideo"), frame = $(".film__frame"), hint = $("#filmHint");
+    if (!sec || !vid) return;
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (reducedM) {
+      // no scrubbing: gentle autoplay loop while visible
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) vid.play().catch(function () {});
+          else vid.pause();
+        });
+      }, { threshold: 0.4 }).observe(sec);
+      return;
+    }
+
+    // fetch the frames just before the guest arrives
+    var loader = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) {
+        vid.preload = "auto";
+        vid.load();
+        loader.disconnect();
+      }
+    }, { rootMargin: "150% 0px" });
+    loader.observe(sec);
+
+    var dur = 0, cur = 0;
+    vid.addEventListener("loadedmetadata", function () { dur = vid.duration || 0; });
+
+    function progress() {
+      var r = sec.getBoundingClientRect();
+      var run = r.height - window.innerHeight;
+      if (run <= 0) return 0;
+      return Math.max(0, Math.min(1, -r.top / run));
+    }
+    function loop() {
+      if (dur) {
+        var p = progress();
+        if (frame) frame.classList.toggle("is-scrubbing", p > 0 && p < 1);
+        if (hint) hint.classList.toggle("is-done", p > 0.9);
+        var target = p * Math.max(0, dur - 0.06);
+        cur += (target - cur) * 0.14;
+        if (Math.abs(vid.currentTime - cur) > 0.021 && !vid.seeking) {
+          try { vid.currentTime = cur; } catch (e) {}
+        }
+      }
+      requestAnimationFrame(loop);
+    }
+    vid.pause();
+    requestAnimationFrame(loop);
+  })();
+
+  /* ---------- 12d. Gold-dust bokeh (canvas) ---------- */
   (function dust() {
     var cv = $("#dust");
     var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
