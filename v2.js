@@ -78,38 +78,85 @@
     $$(".reveal").forEach(function (el) { io.observe(el); });
   })();
 
-  /* film: sound toggle + fade into the background on scroll */
+  /* film portal: arch first, scroll steps inside (sound joins), then fade */
   (function () {
     var film = $("#film"), btn = $("#soundBtn"), icon = $("#soundIcon"),
-        veil = $("#veil"), cue = $("#stageCue");
-    if (!film) return;
+        veil = $("#veil"), cue = $("#stageCue"), mask = $("#portalMask");
+    if (!film || !mask) return;
     film.play && film.play().catch(function () {});
-    document.addEventListener("touchstart", function once() {
-      if (film.paused) film.play().catch(function () {});
-      document.removeEventListener("touchstart", once);
-    }, { once: true, passive: true });
 
+    /* sound: joins on the guest's first real gesture (their first scroll
+       touch on mobile); the button always stays in control */
+    var userMuted = false;
+    function tryUnmute() {
+      film.muted = false;
+      film.play().catch(function () {});
+      if (icon) icon.textContent = "🔊";
+    }
+    function gesture(e) {
+      if (e.target && e.target.closest && e.target.closest("#soundBtn")) return;
+      ["pointerdown", "touchstart", "keydown"].forEach(function (ev) {
+        document.removeEventListener(ev, gesture);
+      });
+      if (!userMuted) tryUnmute();
+    }
+    ["pointerdown", "touchstart", "keydown"].forEach(function (ev) {
+      document.addEventListener(ev, gesture, { passive: true });
+    });
     if (btn) {
       btn.addEventListener("click", function () {
         film.muted = !film.muted;
+        userMuted = film.muted;
         if (icon) icon.textContent = film.muted ? "🔇" : "🔊";
         if (!film.muted && film.paused) film.play().catch(function () {});
       });
     }
 
-    // full film on the first screen; a cream veil thickens over ~90% of a
-    // viewport of scrolling, then the film stays as a soft faded backdrop
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var p = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
-      if (veil) veil.style.opacity = (p * 0.88).toFixed(3);
-      film.style.filter = p > 0.02 ? "blur(" + (p * 2.2).toFixed(2) + "px)" : "";
-      if (cue) cue.style.opacity = (1 - p * 1.6).toFixed(2);
+    var reducedM = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reducedM) { if (veil) veil.style.opacity = ".7"; return; }
+
+    /* scroll choreography (continuous rAF; immune to Safari scroll quirks):
+       phase 1 (0 -> 1.15vh): the arch scales until the film fills the screen
+       phase 2 (1.35vh -> 2.1vh): the cream veil fades the film back */
+    var baseW = 0, baseH = 0, S = 1, lastY = -1;
+    function smooth(t) { return t * t * (3 - 2 * t); }
+    function apply(y) {
+      var vh = window.innerHeight || 1;
+      var t1 = smooth(Math.min(1, Math.max(0, y / (vh * 1.15))));
+      var scale = 1 + t1 * (S - 1);
+      mask.style.transform = "scale(" + scale.toFixed(4) + ")";
+      var t2 = Math.min(1, Math.max(0, (y - vh * 1.35) / (vh * 0.75)));
+      if (veil) veil.style.opacity = (t2 * 0.92).toFixed(3);
+      if (cue) cue.style.opacity = Math.max(0, 1 - t1 * 2.4).toFixed(2);
     }
-    document.addEventListener("scroll", function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
+    function measure() {
+      mask.style.transform = "none";
+      var r = mask.getBoundingClientRect();
+      baseW = r.width || 1; baseH = r.height || 1;
+      // the mask top is a semicircular arch: keep scaling until the dome
+      // circle contains the viewport's top corners (no cream wedges)
+      var vw = window.innerWidth, vh = window.innerHeight;
+      function covers(s) {
+        var R = s * baseW / 2, H = s * baseH;
+        var c = H / 2 - R;                    // dome-circle centre above mask centre
+        var dx = vw / 2, dy = vh / 2 - c;
+        if (dy <= 0) return dx <= s * baseW / 2;
+        return dx * dx + dy * dy <= R * R;
+      }
+      S = Math.max(vw / baseW, vh / baseH);
+      var guard = 0;
+      while (!covers(S) && guard++ < 40) S *= 1.05;
+      S *= 1.04;
+      lastY = -1;
+    }
+    function loop() {
+      var y = window.pageYOffset || document.documentElement.scrollTop || 0;
+      if (y !== lastY) { lastY = y; apply(y); }
+      requestAnimationFrame(loop);
+    }
+    var rT;
+    window.addEventListener("resize", function () { clearTimeout(rT); rT = setTimeout(measure, 150); });
+    measure();
+    requestAnimationFrame(loop);
   })();
 })();
