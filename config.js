@@ -23,22 +23,22 @@ window.INVITATION = {
   venue:   "Al-Aziz Al-Hakim Mosque",
   address: "Al-Hakim Mosque, Al-Muizz Street, Cairo, Egypt",
   // Google Maps location link (tap = opens directions):
-  mapUrl:  "https://www.google.com/maps/search/?api=1&query=Al-Hakim+Mosque+Al-Muizz+Cairo",
+  mapUrl:  "https://maps.app.goo.gl/KiraxrUkas2D9LPx5?g_st=ic",
 
   /* ---- Dress code (ladies: summer colour palette) ---- */
   dress:     "Elegant & modest — summer colours",
   dressNote: "Ladies, we'd love a palette of soft summer hues (see below).",
 
   // Swatches shown to guests. Add/remove freely — { name, hex }.
+  // Pantone garden palette: Celebration / Golden Cypress / Sangria Sunset /
+  // Lemon Drop / Golden Poppy / Nantucket Breeze.
   ladiesPalette: [
-    { name: "Coral",     hex: "#FF8C7A" },
-    { name: "Peach",     hex: "#FFC8A2" },
-    { name: "Blush",     hex: "#F7C6CE" },
-    { name: "Lemon",     hex: "#F6E27A" },
-    { name: "Mint",      hex: "#A8D8C0" },
-    { name: "Sky",       hex: "#A9D3E8" },
-    { name: "Lavender",  hex: "#C7B8E6" },
-    { name: "Sage",      hex: "#BFC9A0" }
+    { name: "Celebration",      hex: "#820043" },
+    { name: "Golden Cypress",   hex: "#7D7F2E" },
+    { name: "Sangria Sunset",   hex: "#EC6FA1" },
+    { name: "Lemon Drop",       hex: "#F9E27D" },
+    { name: "Golden Poppy",     hex: "#F2903D" },
+    { name: "Nantucket Breeze", hex: "#B7D1EA" }
   ],
 
   /* ---- Hashtag (optional, set "" to hide) ---- */
