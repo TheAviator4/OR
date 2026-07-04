@@ -178,17 +178,20 @@ body::before {
   50%      { filter: drop-shadow(0 5px 16px #5d6b4d88); }
 }
 
-/* ---------------------------------------------------------- Background film */
-.bgfilm {
-  position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover;
-  z-index: 0; pointer-events: none; opacity: .32;
+/* ---------------------------------------------------------- Version toggle */
+.version-toggle {
+  position: fixed; top: max(.9rem, env(safe-area-inset-top)); right: max(.9rem, env(safe-area-inset-right));
+  z-index: 55; display: flex; gap: 2px; padding: 3px;
+  background: #faf6ecd9; backdrop-filter: blur(8px);
+  border: 1px solid #d8cdae; border-radius: 2rem; box-shadow: 0 6px 18px #00000018;
 }
-.bgfilm-veil {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background:
-    radial-gradient(120vw 90vh at 50% 32%, #f4eee075 0%, #f4eee0c9 72%),
-    linear-gradient(180deg, #f4eee052, #f4eee0a8);
+.version-toggle__opt {
+  font-family: var(--font-label); font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-soft); text-decoration: none; padding: .45rem .85rem; border-radius: 2rem;
+  transition: background .3s, color .3s;
 }
+.version-toggle__opt:hover { color: var(--sage); }
+.version-toggle__opt.is-active { background: var(--sage); color: var(--paper); }
 
 /* ---------------------------------------------------------- Petals */
 .petals { position: fixed; inset: 0; pointer-events: none; z-index: 5; overflow: hidden; }
