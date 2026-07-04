@@ -9,6 +9,8 @@ window.INVITATION = {
   /* ---- The couple ---- */
   groom: "Omar",
   bride: "Raghad",
+  groomAr: "عمر",
+  brideAr: "رغد",
 
   /* ---- Date & time ----
      eventDate drives the countdown & "Add to calendar". ISO format w/ timezone:
@@ -17,28 +19,33 @@ window.INVITATION = {
   eventDate: "2026-07-17T20:00:00+03:00",
   dateLong:  "Friday, 17th of July 2026",
   time:      "8:00 PM",
+  dateLongAr: "الجمعة، ١٧ يوليو ٢٠٢٦",
+  timeAr:     "٨:٠٠ مساءً",
   durationHours: 4,            // used for the calendar event length
 
   /* ---- Venue ---- */
   venue:   "Al-Aziz Al-Hakim Mosque",
   address: "Al-Hakim Mosque, Al-Muizz Street, Cairo, Egypt",
+  venueAr:   "مسجد العزيز الحكيم",
+  addressAr: "جامع الحاكم، شارع المعز، القاهرة",
   // Google Maps location link (tap = opens directions):
   mapUrl:  "https://maps.app.goo.gl/KiraxrUkas2D9LPx5?g_st=ic",
 
   /* ---- Dress code (ladies: summer colour palette) ---- */
   dress:     "Elegant & modest — summer colours",
+  dressAr:   "أناقة واحتشام — ألوان صيفية",
   dressNote: "Ladies, we'd love a palette of soft summer hues (see below).",
 
   // Swatches shown to guests. Add/remove freely — { name, hex }.
   // Pantone garden palette: Celebration / Golden Cypress / Sangria Sunset /
   // Lemon Drop / Golden Poppy / Nantucket Breeze.
   ladiesPalette: [
-    { name: "Celebration",      hex: "#820043" },
-    { name: "Golden Cypress",   hex: "#7D7F2E" },
-    { name: "Sangria Sunset",   hex: "#EC6FA1" },
-    { name: "Lemon Drop",       hex: "#F9E27D" },
-    { name: "Golden Poppy",     hex: "#F2903D" },
-    { name: "Nantucket Breeze", hex: "#B7D1EA" }
+    { name: "Celebration",      nameAr: "عنّابي",   hex: "#820043" },
+    { name: "Golden Cypress",   nameAr: "زيتوني",   hex: "#7D7F2E" },
+    { name: "Sangria Sunset",   nameAr: "وردي",     hex: "#EC6FA1" },
+    { name: "Lemon Drop",       nameAr: "ليموني",   hex: "#F9E27D" },
+    { name: "Golden Poppy",     nameAr: "برتقالي",  hex: "#F2903D" },
+    { name: "Nantucket Breeze", nameAr: "سماوي",    hex: "#B7D1EA" }
   ],
 
   /* ---- Hashtag (optional, set "" to hide) ---- */

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#f4eee0" />
-  <title>Omar &amp; Raghad — Katb Ketab</title>
-  <meta name="description" content="You are warmly invited to celebrate our Katb Ketab." />
+  <title>كتب كتاب عمر ورغد</title>
+  <meta name="description" content="يسعدنا دعوتكم لحضور حفل كتب الكتاب." />
 
-  <meta property="og:title" content="Omar & Raghad — You're Invited" />
-  <meta property="og:description" content="Join us as we begin our journey together, insha'Allah." />
+  <meta property="og:title" content="كتب كتاب عمر ورغد — أنتم مدعوون" />
+  <meta property="og:description" content="شاركونا فرحتنا ببداية حياتنا معًا بإذن الله." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Cinzel:wght@400;500&family=Amiri:ital@0;1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Cinzel:wght@400;500&family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="v2.css" />
 </head>
@@ -21,12 +21,12 @@
 
   <!-- Language toggle -->
   <nav class="version-toggle" aria-label="Language">
-    <a href="index.html" class="version-toggle__opt is-active" aria-current="page">English</a>
-    <a href="ar.html" class="version-toggle__opt" lang="ar">العربية</a>
+    <a href="index.html" class="version-toggle__opt" lang="en">English</a>
+    <a href="ar.html" class="version-toggle__opt is-active" aria-current="page">العربية</a>
   </nav>
 
   <!-- Sound toggle -->
-  <button id="soundBtn" class="sound-btn" aria-label="Toggle sound">
+  <button id="soundBtn" class="sound-btn" aria-label="تشغيل / كتم الصوت">
     <span id="soundIcon">🔇</span>
   </button>
 
@@ -128,9 +128,9 @@
   <div class="portal" id="portal" aria-hidden="true">
     <div class="portal__mask" id="portalMask">
       <video id="film" autoplay muted loop playsinline
-             preload="auto" poster="assets/film-poster.jpg">
-        <source src="assets/film-play.mp4" type="video/mp4" />
-        <source src="assets/film-play.webm" type="video/webm" />
+             preload="auto" poster="assets/film-ar-poster.jpg">
+        <source src="assets/film-ar.mp4" type="video/mp4" />
+        <source src="assets/film-ar.webm" type="video/webm" />
       </video>
     </div>
   </div>
@@ -139,7 +139,7 @@
   <!-- scroll runway: arch view -> inside the film -> fade to backdrop -->
   <section class="stage" id="stage">
     <div class="stage__cue" id="stageCue" aria-hidden="true">
-      <span>scroll — step inside</span><span class="stage__cue-arrow">⌄</span>
+      <span>مرّر للدخول</span><span class="stage__cue-arrow">⌄</span>
     </div>
   </section>
 
@@ -149,57 +149,57 @@
     <section class="block invite">
       <div class="card reveal">
         <p class="invite__bismillah st" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-        <p class="invite__eyebrow st">Together with their families</p>
+        <p class="invite__eyebrow st">تتشرّف عائلتا العروسين بدعوتكم</p>
         <h1 class="invite__names st">
-          <span data-config="groom">Omar</span>
-          <i class="invite__amp">&amp;</i>
-          <span data-config="bride">Raghad</span>
+          <span data-config="groomAr">عمر</span>
+          <i class="invite__amp">و</i>
+          <span data-config="brideAr">رغد</span>
         </h1>
-        <p class="invite__line st">joyfully invite you to their <strong>Katb Ketab</strong></p>
-        <p class="invite__date st" data-config="dateLong">Friday, 17th of July 2026</p>
+        <p class="invite__line st">لحضور حفل <strong>كتب الكتاب</strong></p>
+        <p class="invite__date st" data-config="dateLongAr">الجمعة، ١٧ يوليو ٢٠٢٦</p>
 
         <div class="divider st" aria-hidden="true">✦ ✦ ✦</div>
 
         <div class="countdown" id="countdownGrid" aria-live="polite">
-          <div class="cd"><b id="cd-days">––</b><span>days</span></div>
-          <div class="cd"><b id="cd-hours">––</b><span>hours</span></div>
-          <div class="cd"><b id="cd-mins">––</b><span>min</span></div>
-          <div class="cd"><b id="cd-secs">––</b><span>sec</span></div>
+          <div class="cd"><b id="cd-days">––</b><span>يوم</span></div>
+          <div class="cd"><b id="cd-hours">––</b><span>ساعة</span></div>
+          <div class="cd"><b id="cd-mins">––</b><span>دقيقة</span></div>
+          <div class="cd"><b id="cd-secs">––</b><span>ثانية</span></div>
         </div>
-        <p class="countdown-done" id="countdownMsg" hidden>Today is the day, alhamdulillah ✦</p>
+        <p class="countdown-done" id="countdownMsg" hidden>اليوم هو الموعد، الحمد لله ✦</p>
 
         <div class="actions st">
-          <a href="#" id="calBtn" class="btn btn--ghost">＋ Add to calendar</a>
-          <a href="#" id="mapBtn" class="btn btn--gold">⌖ Get directions</a>
+          <a href="#" id="calBtn" class="btn btn--ghost">＋ أضِف إلى التقويم</a>
+          <a href="#" id="mapBtn" class="btn btn--gold">⌖ الوصول إلى الموقع</a>
         </div>
       </div>
     </section>
 
     <section class="block details">
-      <h2 class="block__title script reveal">The Celebration</h2>
+      <h2 class="block__title script reveal">تفاصيل الحفل</h2>
       <svg class="starband reveal" viewBox="0 0 300 24" aria-hidden="true"><use href="#starband"/></svg>
       <div class="details__grid">
         <div class="arch-card reveal">
           <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-when"/></svg>
-          <h3 class="arch-card__head">When</h3>
-          <p data-config="dateLong">Friday, 17 July 2026</p>
-          <p class="muted" data-config="time">8:00 PM</p>
+          <h3 class="arch-card__head">متى</h3>
+          <p data-config="dateLongAr">الجمعة، ١٧ يوليو ٢٠٢٦</p>
+          <p class="muted" data-config="timeAr">٨:٠٠ مساءً</p>
         </div>
         <div class="arch-card reveal">
           <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-where"/></svg>
-          <h3 class="arch-card__head">Where</h3>
-          <p data-config="venue">Al-Aziz Al-Hakim Mosque</p>
-          <p class="muted" data-config="address">Cairo, Egypt</p>
-          <a href="#" id="mapBtn2" class="arch-card__link">Get directions →</a>
+          <h3 class="arch-card__head">أين</h3>
+          <p data-config="venueAr">مسجد العزيز الحكيم</p>
+          <p class="muted" data-config="addressAr">القاهرة</p>
+          <a href="#" id="mapBtn2" class="arch-card__link">الوصول إلى الموقع ←</a>
         </div>
         <div class="arch-card reveal">
           <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-dress"/></svg>
-          <h3 class="arch-card__head">Dress</h3>
-          <p data-config="dress">Elegant &amp; modest</p>
-          <p class="muted">Ladies — summer hues below</p>
+          <h3 class="arch-card__head">الزيّ</h3>
+          <p data-config="dressAr">أناقة واحتشام</p>
+          <p class="muted">للسيدات — درجات صيفية أدناه</p>
         </div>
         <div class="arch-card arch-card--palette reveal">
-          <h3 class="arch-card__head">A Summer Palette</h3>
+          <h3 class="arch-card__head">ألوان صيفية</h3>
           <div class="palette" id="paletteGrid"></div>
         </div>
       </div>
@@ -207,7 +207,7 @@
 
     <section class="sage" id="closing">
       <div class="sage__lace" aria-hidden="true"></div>
-      <p class="sage__sent script reveal">Sealed with love</p>
+      <p class="sage__sent script reveal">خُتمت بالحب</p>
 
       <div class="env-back reveal">
         <svg class="env-back__flap" viewBox="0 0 340 96" preserveAspectRatio="none" aria-hidden="true">
@@ -217,11 +217,11 @@
         <svg class="env-back__bouquet" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
 
         <p class="closing__ar st" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
-        <p class="closing__en st">May God bless you both and unite you in goodness.</p>
+        
         <p class="names-line st">
-          <span data-config="groom">Omar</span>
-          <i>&amp;</i>
-          <span data-config="bride">Raghad</span>
+          <span data-config="groomAr">عمر</span>
+          <i>و</i>
+          <span data-config="brideAr">رغد</span>
         </p>
         <p class="closing__hashtag st" data-config="hashtag">#OmarAndRaghad</p>
       </div>

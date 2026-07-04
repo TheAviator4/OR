@@ -5,19 +5,24 @@
   var $ = function (s) { return document.querySelector(s); };
   var $$ = function (s) { return Array.prototype.slice.call(document.querySelectorAll(s)); };
 
+  var AR = (document.documentElement.lang || "").toLowerCase().indexOf("ar") === 0;
+
   /* config injection */
   $$("[data-config]").forEach(function (el) {
     var key = el.getAttribute("data-config");
     if (CFG[key] != null && CFG[key] !== "") el.textContent = CFG[key];
   });
-  document.title = (CFG.groom || "") + " & " + (CFG.bride || "") + " — Katb Ketab";
+  document.title = AR && CFG.groomAr
+    ? "كتب كتاب " + CFG.groomAr + " و" + CFG.brideAr
+    : (CFG.groom || "") + " & " + (CFG.bride || "") + " — Katb Ketab";
 
   /* palette */
   (function () {
     var grid = $("#paletteGrid"), list = CFG.ladiesPalette || [];
     if (!grid || !list.length) return;
     grid.innerHTML = list.map(function (c) {
-      return '<div class="swatch"><i style="background:' + c.hex + '"></i><b>' + c.name + "</b></div>";
+      var label = AR && c.nameAr ? c.nameAr : c.name;
+      return '<div class="swatch"><i style="background:' + c.hex + '"></i><b>' + label + "</b></div>";
     }).join("");
   })();
 
