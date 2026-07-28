@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#f4eee0" />
+  <title>دعوة زفاف</title>
+  <meta name="description" content="يسعدنا دعوتكم لحضور حفل كتب الكتاب." />
+
+  <meta property="og:title" content="أنتم مدعوون" />
+  <meta property="og:description" content="شاركونا فرحتنا ببداية حياتنا معًا بإذن الله." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="https://theaviator4.github.io/OR/new-invitation/assets/share-ar.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://theaviator4.github.io/OR/new-invitation/assets/share-ar.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Pinyon+Script&family=Cinzel:wght@400;500&family=Amiri:ital@0;1&family=El+Messiri:wght@400;500;600;700&family=Almarai:wght@300;400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="v2.css" />
+</head>
+<body>
+
+  <!-- Language toggle -->
+  <nav class="version-toggle" aria-label="Language">
+    <a href="index.html" class="version-toggle__opt" lang="en">English</a>
+    <a href="ar.html" class="version-toggle__opt is-active" aria-current="page">العربية</a>
+  </nav>
+
+  <!-- Sound toggle -->
+  <button id="soundBtn" class="sound-btn" aria-label="تشغيل / كتم الصوت">
+    <span id="soundIcon">🔇</span>
+  </button>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="star8" viewBox="0 0 40 40">
+        <g fill="none" stroke="currentColor" stroke-width="1.3">
+          <rect x="9" y="9" width="22" height="22"/>
+          <rect x="9" y="9" width="22" height="22" transform="rotate(45 20 20)"/>
+        </g>
+        <circle cx="20" cy="20" r="2.6" fill="currentColor"/>
+      </symbol>
+      <symbol id="starband" viewBox="0 0 300 24">
+        <use href="#star8" x="10"  y="2" width="20" height="20"/>
+        <use href="#star8" x="75"  y="2" width="20" height="20"/>
+        <use href="#star8" x="140" y="2" width="20" height="20"/>
+        <use href="#star8" x="205" y="2" width="20" height="20"/>
+        <use href="#star8" x="270" y="2" width="20" height="20"/>
+        <g fill="currentColor" opacity=".7">
+          <circle cx="52.5" cy="12" r="1.8"/><circle cx="117.5" cy="12" r="1.8"/>
+          <circle cx="182.5" cy="12" r="1.8"/><circle cx="247.5" cy="12" r="1.8"/>
+        </g>
+      </symbol>
+      <symbol id="crescent" viewBox="0 0 40 40">
+        <path d="M27 4 A 16 16 0 1 0 36 22 A 12.5 12.5 0 1 1 27 4 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="bouquet" viewBox="0 0 160 120">
+        <g fill="none" stroke="#7c8a67" stroke-width="1.4" stroke-linecap="round">
+          <path d="M20 110 C 45 85 70 60 103 42"/>
+          <path d="M30 112 C 60 95 90 80 124 72"/>
+          <path d="M18 106 C 35 90 46 72 51 52"/>
+        </g>
+        <g fill="#9aa680">
+          <ellipse cx="56" cy="78" rx="12" ry="4.5" transform="rotate(-35 56 78)"/>
+          <ellipse cx="76" cy="88" rx="11" ry="4.2" transform="rotate(-15 76 88)"/>
+          <ellipse cx="40" cy="92" rx="10" ry="4"   transform="rotate(-50 40 92)"/>
+          <ellipse cx="94" cy="60" rx="11" ry="4"   transform="rotate(-30 94 60)"/>
+          <ellipse cx="112" cy="82" rx="9" ry="3.6" transform="rotate(-10 112 82)"/>
+        </g>
+        <!-- main rose -->
+        <circle cx="104" cy="38" r="17" fill="#e9d2c9"/>
+        <path d="M87 38 a17 17 0 0 1 34 0" fill="#dcb2a9" opacity=".55"/>
+        <g fill="none" stroke="#bb9188" stroke-width="1.1" stroke-linecap="round">
+          <path d="M104 38 C 108 34 107 29 103 27 C 97 25 92 30 94 36 C 96 43 104 46 111 42 C 118 38 118 28 111 23"/>
+          <path d="M104 38 C 102 36 102 33 104 32"/>
+        </g>
+        <!-- five-petal blossom -->
+        <g transform="translate(52 46)">
+          <g fill="#f4e2da">
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(72)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(144)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(216)"/>
+            <ellipse cx="0" cy="-10" rx="5.5" ry="9" transform="rotate(288)"/>
+          </g>
+          <circle r="4.2" fill="#c8ad77"/>
+        </g>
+        <!-- bud -->
+        <circle cx="126" cy="70" r="6" fill="#e9d2c9"/>
+        <path d="M120 75 Q126 62 132 75" fill="none" stroke="#7c8a67" stroke-width="1.2"/>
+        <!-- islamic crescent & star tucked into the flowers -->
+        <use href="#crescent" x="126" y="8" width="22" height="22" style="color:#c8ad77"/>
+        <use href="#star8" x="146" y="2" width="11" height="11" style="color:#c8ad77"/>
+        <g fill="#c8ad77">
+          <circle cx="70" cy="70" r="2"/><circle cx="88" cy="52" r="2"/><circle cx="45" cy="62" r="2"/>
+        </g>
+      </symbol>
+      <symbol id="seal" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="44" fill="currentColor"/>
+        <circle cx="50" cy="50" r="44" fill="none" stroke="#00000022" stroke-width="2"/>
+        <circle cx="50" cy="50" r="36" fill="none" stroke="#ffffff55" stroke-width="1" stroke-dasharray="2 4"/>
+        <g fill="none" stroke="#ffffffcc" stroke-width="1.6" stroke-linecap="round">
+          <path d="M50 66 V 44"/>
+          <path d="M50 44 C 44 36 42 30 45 26 C 50 31 52 38 50 44 C 48 38 50 31 55 26 C 58 30 56 36 50 44Z"/>
+          <path d="M50 50 C 43 47 38 47 35 50 M50 50 C 57 47 62 47 65 50"/>
+        </g>
+      </symbol>
+      <symbol id="ic-when" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="24" cy="25" r="14"/><path d="M24 17 V 25 L 30 29 M24 11 V 7 M20 7 H 28"/>
+        </g>
+      </symbol>
+      <symbol id="ic-where" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 42 C 24 42 37 30 37 20 A 13 13 0 0 0 11 20 C 11 30 24 42 24 42Z"/><circle cx="24" cy="20" r="5"/>
+        </g>
+      </symbol>
+      <symbol id="ic-dress" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 8 L 24 13 L 29 8 M19 8 C 18 14 14 16 14 22 L 20 24 L 18 40 H 30 L 28 24 L 34 22 C 34 16 30 14 29 8"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ THE FILM PORTAL (fixed backdrop) ============ -->
+  <!-- First view: the film inside a gold arch. Scrolling steps through the
+       arch until the film fills the screen, then the veil fades it back. -->
+  <div class="portal" id="portal" aria-hidden="true">
+    <div class="portal__mask" id="portalMask">
+      <video id="film" autoplay muted loop playsinline
+             preload="auto" poster="assets/film-ar-poster.jpg">
+        <source src="assets/film-ar.mp4" type="video/mp4" />
+        <source src="assets/film-ar.webm" type="video/webm" />
+      </video>
+    </div>
+  </div>
+  <div class="veil" id="veil" aria-hidden="true"></div>
+
+  <!-- scroll runway: arch view -> inside the film -> fade to backdrop -->
+  <section class="stage" id="stage">
+    <div class="stage__cue" id="stageCue" aria-hidden="true">
+      <span>مرّر للدخول</span><span class="stage__cue-arrow">⌄</span>
+    </div>
+  </section>
+
+  <!-- ============ THE INVITATION ============ -->
+  <main class="content">
+
+    <section class="block invite">
+      <div class="card reveal">
+        <p class="invite__bismillah st" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+        <p class="invite__eyebrow st">تتشرّف عائلتا العروسين بدعوتكم</p>
+        <p class="invite__line st">لحضور حفل <strong>كتب كتاب</strong></p>
+        <h1 class="invite__names st">
+          <span data-config="groomAr">العريس</span>
+          <i class="invite__amp">و</i>
+          <span data-config="brideAr">العروس</span>
+        </h1>
+        <p class="invite__date st" data-config="dateLongAr">الجمعة، ١٧ يوليو ٢٠٢٦</p>
+
+        <div class="divider st" aria-hidden="true">✦ ✦ ✦</div>
+
+        <div class="countdown" id="countdownGrid" aria-live="polite">
+          <div class="cd"><b id="cd-days">––</b><span>يوم</span></div>
+          <div class="cd"><b id="cd-hours">––</b><span>ساعة</span></div>
+          <div class="cd"><b id="cd-mins">––</b><span>دقيقة</span></div>
+          <div class="cd"><b id="cd-secs">––</b><span>ثانية</span></div>
+        </div>
+        <p class="countdown-done" id="countdownMsg" hidden>اليوم هو الموعد، الحمد لله ✦</p>
+
+        <div class="actions st">
+          <a href="#" id="calBtn" class="btn btn--ghost">＋ أضِف إلى التقويم</a>
+          <a href="#" id="mapBtn" class="btn btn--gold">⌖ الوصول إلى الموقع</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block details">
+      <h2 class="block__title script reveal">تفاصيل الحفل</h2>
+      <svg class="starband reveal" viewBox="0 0 300 24" aria-hidden="true"><use href="#starband"/></svg>
+      <div class="details__grid">
+        <div class="arch-card reveal">
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-when"/></svg>
+          <h3 class="arch-card__head">التاريخ</h3>
+          <p data-config="dateLongAr">الجمعة، ١٧ يوليو ٢٠٢٦</p>
+          <p class="muted" data-config="timeAr">٨:٠٠ مساءً</p>
+        </div>
+        <div class="arch-card reveal">
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-where"/></svg>
+          <h3 class="arch-card__head">المكان</h3>
+          <p data-config="venueAr">مسجد العزيز الحكيم</p>
+          <p class="muted" data-config="addressAr">الأباجية، المقطم، القاهرة</p>
+          <a href="#" id="mapBtn2" class="arch-card__link">الوصول إلى الموقع ←</a>
+        </div>
+        <div class="arch-card reveal">
+          <svg class="ico" viewBox="0 0 48 48" aria-hidden="true"><use href="#ic-dress"/></svg>
+          <h3 class="arch-card__head">الزيّ</h3>
+          <p class="muted">للسيدات — ألوان صيفية</p>
+        </div>
+        <div class="arch-card arch-card--palette reveal">
+          <h3 class="arch-card__head">ألوان صيفية</h3>
+          <div class="palette" id="paletteGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sage" id="closing">
+      <div class="sage__lace" aria-hidden="true"></div>
+      <p class="sage__sent script reveal">خُتمت بالحب</p>
+
+      <div class="env-back reveal">
+        <svg class="env-back__flap" viewBox="0 0 340 96" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M2 0 L170 88 L338 0" fill="#f1e9d6" stroke="#d8cdae" stroke-width="1.6" stroke-linejoin="round"/>
+        </svg>
+        <div class="env-back__seal" aria-hidden="true"><svg viewBox="0 0 100 100"><use href="#seal"/></svg></div>
+        <svg class="env-back__bouquet" viewBox="0 0 160 120" aria-hidden="true"><use href="#bouquet"/></svg>
+
+        <p class="closing__ar st" lang="ar" dir="rtl">بَارَكَ اللَّهُ لَكُمَا وَبَارَكَ عَلَيْكُمَا وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</p>
+        
+        <p class="names-line st">
+          <span data-config="groomAr">العريس</span>
+          <i>و</i>
+          <span data-config="brideAr">العروس</span>
+        </p>
+        <p class="closing__hashtag st" data-config="hashtag"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="v2.js"></script>
+</body>
+</html>
